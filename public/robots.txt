@@ -1,0 +1,5 @@
+# robots.txt for ExploreDarija
+# Replace the SITE_URL below with your production domain
+User-agent: *
+Allow: /
+Sitemap: https://example.com/sitemap.xml
