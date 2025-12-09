@@ -193,7 +193,7 @@ export default function PricingPage() {
         <li className="flex gap-2"><CheckIcon /> Includes Premium for 3 months</li>
       </ul>
 
-      <a href="/contact" className="mt-6 block text-center px-6 py-3 border rounded-lg font-semibold hover:bg-gray-50 transition">
+      <a href="/booking" className="mt-6 block text-center px-6 py-3 border rounded-lg font-semibold hover:bg-gray-50 transition">
         Book a Session
       </a>
     </div>
@@ -222,7 +222,7 @@ export default function PricingPage() {
     </ul>
 
     <a
-      href="/contact"
+      href="/booking"
       className="mt-8 block text-center px-8 py-4 bg-primary text-white rounded-xl font-semibold hover:bg-primary-dark transition"
     >
       Book Your Session — $19.99
@@ -263,7 +263,7 @@ export default function PricingPage() {
 
         <tr className="border-t">
           <td className="p-4">Lhajja AI (Darija AI)</td>
-          <td className="p-4 text-center">✖</td>
+          <td className="p-4 text-center">Limited</td>
           <td className="p-4 text-center">✔</td>
           <td className="p-4 text-center">✔</td>
         </tr>

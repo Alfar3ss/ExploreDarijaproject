@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from 'react'
-
 export default function BookingPage() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -21,8 +20,16 @@ export default function BookingPage() {
     setStatus('sending')
     setMessage('')
 
+    // Use the first slot in availability as the main date/time if not set
+    let mainDate = date;
+    let mainTime = time;
+    if ((!mainDate || !mainTime) && availability.length > 0) {
+      mainDate = availability[0].date;
+      mainTime = availability[0].time;
+    }
+
     try {
-      const payload = { name, email, date, time, duration, language, notes, sessionsCount, availability }
+      const payload = { name, email, date: mainDate, time: mainTime, duration, language, notes, sessionsCount, availability }
       const res = await fetch('/api/booking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -79,34 +86,42 @@ export default function BookingPage() {
                   <input
                     type="number"
                     min={1}
-                    max={10}
+                    max={1000}
                     step={1}
                     value={sessionsCount}
                     onChange={e => setSessionsCount(e.target.value.replace(/[^0-9]/g, ''))}
                     className="mt-1 p-2 border rounded max-w-xs"
-                    aria-label="Number of sessions (1-10)"
+                    aria-label="Number of sessions"
                   />
                 </label>
 
               <label className="flex flex-col">
                 <span className="text-sm font-medium">Preferred date</span>
-                <input type="date" className="mt-1 p-2 border rounded" id="avail-date" />
+                <input
+                  type="date"
+                  className="mt-1 p-2 border rounded"
+                  id="avail-date"
+                  value={date}
+                  onChange={e => setDate(e.target.value)}
+                />
               </label>
 
               <label className="flex flex-col">
                 <span className="text-sm font-medium">Preferred start time</span>
-                <input type="time" className="mt-1 p-2 border rounded" id="avail-time" />
+                <input
+                  type="time"
+                  className="mt-1 p-2 border rounded"
+                  id="avail-time"
+                  value={time}
+                  onChange={e => setTime(e.target.value)}
+                />
               </label>
             </div>
 
             <div className="mt-3 flex items-center gap-2">
               <button type="button" onClick={() => {
-                const d = (document.getElementById('avail-date') as HTMLInputElement | null)?.value
-                const t = (document.getElementById('avail-time') as HTMLInputElement | null)?.value
-                if (!d || !t) return alert('Please choose date and time for availability')
-                setAvailability(prev => [...prev, { date: d, time: t }])
-                ;(document.getElementById('avail-date') as HTMLInputElement | null)!.value = ''
-                ;(document.getElementById('avail-time') as HTMLInputElement | null)!.value = ''
+                if (!date || !time) return alert('Please choose date and time for availability');
+                setAvailability(prev => [...prev, { date, time }]);
               }} className="px-3 py-2 bg-secondary text-white rounded">Add slot</button>
               <div className="text-sm text-gray-600">Each slot is a 1-hour block starting at the time you choose.</div>
             </div>
