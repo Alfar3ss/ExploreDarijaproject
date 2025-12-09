@@ -18,6 +18,7 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState<any[]>([])
   const [posts, setPosts] = useState<any[]>([])
   const [comments, setComments] = useState<any[]>([])
+  const [bookings, setBookings] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   async function fetchData() {
@@ -34,6 +35,10 @@ export default function AdminDashboard() {
     const commentsRes = await fetch(`${SUPABASE_URL}/rest/v1/comments?select=id,author_name,text,created_at&order=created_at.desc&limit=5`, { headers: supabaseHeaders() })
     const comments = commentsRes.ok ? await commentsRes.json() : []
     setComments(comments)
+    // Fetch bookings
+    const bookingsRes = await fetch(`${SUPABASE_URL}/rest/v1/bookings?select=id&order=created_at.desc`, { headers: supabaseHeaders() })
+    const bookings = bookingsRes.ok ? await bookingsRes.json() : []
+    setBookings(bookings)
     setLoading(false)
   }
 
@@ -57,7 +62,7 @@ export default function AdminDashboard() {
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <StatCardModern label="Comments" value={loading ? '...' : String(comments.length)} icon={<CommentIcon />} color="from-yellow-400 to-orange-500" />
           <StatCardModern label="Active Users" value={loading ? '...' : String(activeUsers)} icon={<UserIcon />} color="from-purple-400 to-indigo-500" />
-          <StatCardModern label="Posts" value={loading ? '...' : String(posts.length)} icon={<PostIcon />} color="from-blue-400 to-cyan-500" />
+          <StatCardModern label="Bookings" value={loading ? '...' : String(bookings.length)} icon={<BookingIcon />} color="from-pink-400 to-red-500" />
           <StatCardModern label="Total Visitors" value={loading ? '...' : String(visitors)} icon={<EyeIcon />} color="from-green-400 to-blue-500" />
         </section>
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -111,6 +116,16 @@ function RecentList({ title, items, render, empty }: { title: string, items: any
 }
 
 // SVG Icons
+function BookingIcon() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-pink-200">
+      <rect x="3" y="4" width="18" height="18" rx="3" fill="currentColor" fillOpacity="0.08"/>
+      <rect x="3" y="4" width="18" height="18" rx="3" stroke="currentColor" strokeWidth="2"/>
+      <path d="M8 2v4M16 2v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M3 10h18" stroke="currentColor" strokeWidth="2"/>
+    </svg>
+  );
+}
 function EyeIcon() {
   return (
     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-200"><ellipse cx="12" cy="12" rx="8" ry="5"/><circle cx="12" cy="12" r="2.5"/></svg>
