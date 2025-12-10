@@ -1,5 +1,7 @@
 "use client"
 import { useState } from "react"
+import ProtectedLink from "../../components/protected-link"
+import { useEffect } from "react"
 import { MotionDiv } from "../../components/motion-div"
 
 export const dynamic = 'force-dynamic'
@@ -8,6 +10,18 @@ import Testimonials from '../../components/testimonials'
 
 export default function PricingPage() {
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly")
+  const [user, setUser] = useState<any>(null)
+  const [toast, setToast] = useState<string|null>(null)
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const res = await fetch('/api/auth/me', { cache: 'no-store' })
+        const json = await res.json()
+        if (json?.user) setUser(json.user)
+      } catch {}
+    }
+    fetchUser()
+  }, [])
 
   const YEARLY_DISCOUNT = 0.3
   const plans = {
@@ -110,7 +124,7 @@ export default function PricingPage() {
         <li className="flex gap-2"><CheckIcon /> Limited translations</li>
       </ul>
 
-      <a href="/login" className="mt-6 block text-center px-6 py-3 border rounded-lg font-semibold hover:bg-gray-50 transition">
+      <a href="/register" className="mt-6 block text-center px-6 py-3 border rounded-lg font-semibold hover:bg-gray-50 transition">
         Get Started
       </a>
     </div>
@@ -119,18 +133,10 @@ export default function PricingPage() {
     <div className="relative bg-white border-2 border-primary rounded-2xl p-8 shadow-lg flex flex-col md:scale-105 overflow-hidden">
       {/* Ribbon badge (top-right) */}
       <div className="absolute top-0 right-0">
-  <span className="
-    inline-block
-    bg-gradient-to-r from-orange-400 via-yellow-500 to-white-500
-    text-white text-[11px] font-bold tracking-wide 
-    px-3 py-1
-    rounded-bl-lg shadow-lg
-    translate-x-1 -translate-y-1
-    ring-1 ring-white/40 backdrop-blur-sm
-  ">
-    FREE • 3 MONTHS
-  </span>
-</div>
+        <span className="inline-block bg-gradient-to-r from-orange-400 via-yellow-500 to-white-500 text-white text-[11px] font-bold tracking-wide px-3 py-1 rounded-bl-lg shadow-lg translate-x-1 -translate-y-1 ring-1 ring-white/40 backdrop-blur-sm">
+          FREE • 3 MONTHS
+        </span>
+      </div>
 
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-semibold text-gray-900">Premium Plan</h3>
@@ -141,23 +147,21 @@ export default function PricingPage() {
         Full access to lessons, tools & Lhajja AI.
       </p>
 
-      <div className="mt-6 flex items-center gap-3">
-        <div className="text-3xl font-extrabold text-gray-900">
-          {billing === "monthly" ? "$4.99" : "$41.91"}
+      <div className="mt-6 flex flex-col items-center gap-2">
+        <div className="flex items-center gap-2">
+          <span className="text-2xl font-extrabold text-gray-400 line-through">$4.99</span>
+          <span className="text-3xl font-extrabold text-primary">$0</span>
         </div>
-        {billing === "yearly" && (
-          <span className="text-xs font-semibold bg-green-100 text-green-700 px-2 py-1 rounded-full">
-            Save 30%
-          </span>
-        )}
+        <span className="text-xs font-semibold text-green-700 bg-green-100 px-2 py-1 rounded-full">
+          We're offering the Premium Plan free for 3 months as we launch!
+        </span>
       </div>
 
-      <div className="text-sm text-gray-500">
-        {billing === "monthly" ? "/ month" : "(billed yearly)"}
+      <div className="text-sm text-gray-500 mt-2">
+        Limited time offer — no payment required
       </div>
 
       <ul className="mt-6 space-y-3 text-gray-800 flex-1 leading-relaxed">
-        <li className="flex gap-2"><CheckIcon /> Full Darija course library</li>
         <li className="flex gap-2"><CheckIcon /> Unlimited translations</li>
         <li className="flex gap-2"><CheckIcon /> Access to Lhajja AI:</li>
         <ul className="ml-6 text-sm text-gray-600 space-y-1">
@@ -168,9 +172,33 @@ export default function PricingPage() {
         </ul>
       </ul>
 
-      <a href="/login" className="mt-6 block text-center px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition">
-        Choose Plan
-      </a>
+      <div className="mt-6">
+        <button
+          className="block text-center px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition w-full"
+          onClick={async () => {
+            // Always fetch latest user before action
+            let latestUser = user
+            try {
+              const res = await fetch('/api/auth/me', { cache: 'no-store' })
+              const json = await res.json()
+              if (json?.user) latestUser = json.user
+            } catch {}
+            if (latestUser?.plan === 'premium') {
+              setToast('You Already A Premium Member')
+              setTimeout(() => setToast(null), 3000)
+            } else {
+              window.location.href = '/upgrade'
+            }
+          }}
+        >
+          Choose Plan
+        </button>
+        {toast && (
+          <div className="fixed top-6 left-1/2 -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg z-[9999] font-semibold text-lg transition">
+            {toast}
+          </div>
+        )}
+      </div>
     </div>
 
     {/* 1-ON-1 PLAN */}

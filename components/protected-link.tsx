@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect, useState, useRef } from "react"
+import ReactDOM from "react-dom"
 
 interface ProtectedLinkProps {
   href: string
@@ -56,9 +57,7 @@ export default function ProtectedLink({ href, children, className, onClick }: Pr
       <Link href={href} className={className} onClick={handleClick}>
         {children}
       </Link>
-
-      {/* Modal */}
-      {showModal && (
+      {showModal && typeof window !== 'undefined' && ReactDOM.createPortal(
         <div className={`fixed inset-0 z-[100] flex items-center justify-center transition-opacity duration-250 ${modalVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
           {/* Backdrop */}
           <div
@@ -174,8 +173,8 @@ export default function ProtectedLink({ href, children, className, onClick }: Pr
               </div>
             </div>
           </div>
-        </div>
-      )}
+        </div>, document.body)
+      }
     </>
   )
 }

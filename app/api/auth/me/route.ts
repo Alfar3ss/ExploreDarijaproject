@@ -33,7 +33,7 @@ export async function GET(req: Request) {
     if (!Array.isArray(sesRows) || !sesRows.length) return NextResponse.json({ user: null })
     const userId = sesRows[0].user_id
 
-    const userUrl = `${SUPABASE_URL!.replace(/\/$/, '')}/rest/v1/users?select=id,name,email&limit=1&id=eq.${encodeURIComponent(userId)}`
+    const userUrl = `${SUPABASE_URL!.replace(/\/$/, '')}/rest/v1/users?select=id,name,email,plan&limit=1&id=eq.${encodeURIComponent(userId)}`
     const userRes = await fetch(userUrl, { headers: supabaseHeaders() })
     if (!userRes.ok) return NextResponse.json({ user: null })
     const users = await userRes.json()

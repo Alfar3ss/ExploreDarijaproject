@@ -1,10 +1,12 @@
 
-import ChatWidget from '../../../components/chat-widget'
 import { cookies, headers } from 'next/headers'
+import loadable from 'next/dynamic'
 
 export const dynamic = 'force-dynamic'
 
-export default async function ChatPage() {
+const ChatPageWrapper = loadable(() => import('./ChatPageWrapper'), { ssr: false })
+
+export default function ChatPage() {
   // determine initial language (cookie or header)
   const cookieStore = cookies()
   const cookieLang = cookieStore.get('iDarija_lang')?.value
@@ -17,12 +19,5 @@ export default async function ChatPage() {
     initial = first.split('-')[0]
   }
 
-  return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        <a href="/dashboard" className="text-sm text-primary">← Back</a>
-        <ChatWidget initialLang={initial} />
-      </div>
-    </div>
-  )
+  return <ChatPageWrapper initialLang={initial} />
 }
