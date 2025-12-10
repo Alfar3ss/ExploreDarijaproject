@@ -6,6 +6,7 @@ import Footer from '../components/footer'
 import { LanguageProvider } from '../components/language-provider'
 import Spinner from '../components/spinner'
 import { usePathname } from 'next/navigation'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -14,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 	useEffect(() => {
 		setLoading(true);
-		const timeout = setTimeout(() => setLoading(false), 600); // Simulate load
+		const timeout = setTimeout(() => setLoading(false), 600); 
 		return () => clearTimeout(timeout);
 	}, [pathname]);
 
