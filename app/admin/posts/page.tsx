@@ -26,7 +26,11 @@ export default function AdminPostsPage(){
       const res = await fetch('/api/posts')
       if (!res.ok) throw new Error('Failed to fetch posts')
       const data = await res.json()
-      setPosts(Array.isArray(data) ? data : [])
+      setPosts(
+  Array.isArray(data)
+    ? data.filter(p => p && typeof p === 'object' && p.slug)
+    : []
+)
     }catch(e){
       console.error(e)
       setPosts([])
@@ -88,9 +92,13 @@ export default function AdminPostsPage(){
 
   const preview = (p: Post) => {
     // open the live blog URL if available, otherwise show content
+    if (!p) {
+      alert('Post not found or invalid.');
+      return;
+    }
     const w = window.open('', '_blank')
     if (!w) return
-    const html = `<!doctype html><html><head><meta charset="utf-8"><title>${p.title}</title></head><body><h1>${p.title}</h1><div>${p.content||''}</div></body></html>`
+    const html = `<!doctype html><html><head><meta charset="utf-8"><title>${p.title || 'Untitled'}</title></head><body><h1>${p.title || 'Untitled'}</h1><div>${p.content||''}</div></body></html>`
     w.document.open(); w.document.write(html); w.document.close()
   }
 

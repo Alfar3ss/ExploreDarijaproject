@@ -1,5 +1,10 @@
 import BlogListClient from "../../components/blog-list-client"
 
+export const metadata = {
+  title: 'Blog - ExploreDarija',
+  description: 'Read the latest articles, tips, and updates about learning Darija (Moroccan Arabic) on the ExploreDarija blog.',
+};
+
 export const dynamic = 'force-dynamic'
 
 const SUPABASE_URL = process.env.SUPABASE_URL

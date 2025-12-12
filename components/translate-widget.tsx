@@ -172,7 +172,6 @@ export default function TranslateWidget({ initialFrom = 'en', initialTo = 'dar',
                 {result.pronunciation && <div className="mt-2 text-sm text-gray-600">{result.pronunciation}</div>}
                 {result.notes && <div className="mt-2 text-sm text-gray-600">{result.notes}</div>}
                 <div className="mt-3 flex gap-2">
-                  <button onClick={() => playAudio()} className="px-3 py-1 border rounded">🔊 Play</button>
                 </div>
               </div>
             ) : (

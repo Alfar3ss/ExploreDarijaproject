@@ -21,19 +21,29 @@ export async function GET(req: Request) {
 
     let qs = 'select=*'
     if (params.get('published') === 'true') qs += '&published=eq.true'
-    if (params.get('limit')) qs += `&limit=${encodeURIComponent(params.get('limit')||'')}`
-    // order by published_at desc, fallback to created_at
+    if (params.get('limit')) qs += `&limit=${encodeURIComponent(params.get('limit') || '')}`
     qs += '&order=published_at.desc.nullslast'
 
     const restUrl = `${SUPABASE_URL!.replace(/\/$/, '')}/rest/v1/posts?${qs}`
     const res = await fetch(restUrl, { headers: makeHeaders(), cache: 'no-store' })
-    if (!res.ok) return NextResponse.json({ error: `Supabase error ${res.status}` }, { status: res.status })
-    const rows = await res.json()
+
+    if (!res.ok) {
+      return NextResponse.json({ error: `Supabase error ${res.status}` }, { status: res.status })
+    }
+
+    let rows = await res.json()
+
+    //  FIX: remove null, undefined, or malformed posts
+    rows = Array.isArray(rows)
+      ? rows.filter(p => p && typeof p === 'object' && p.slug)
+      : []
+
     return NextResponse.json(rows)
   } catch (e: any) {
     return NextResponse.json({ error: e?.message || String(e) }, { status: 500 })
   }
 }
+
 
 export async function POST(req: Request) {
   try {
@@ -52,7 +62,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: `Supabase error: ${res.status} ${txt}` }, { status: res.status })
     }
     const rows = await res.json()
-    return NextResponse.json(rows?.[0] ?? null)
+    return NextResponse.json(
+  rows && rows[0] ? rows[0] : { error: "Post creation failed" },
+  { status: rows && rows[0] ? 200 : 500 }
+)
+
   } catch (e: any) {
     return NextResponse.json({ error: e?.message || String(e) }, { status: 500 })
   }

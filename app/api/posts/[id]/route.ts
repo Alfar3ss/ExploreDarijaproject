@@ -31,7 +31,11 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
       return NextResponse.json({ error: `Supabase error: ${res.status} ${txt}` }, { status: res.status })
     }
     const rows = await res.json()
-    return NextResponse.json(rows?.[0] ?? null)
+    return NextResponse.json(
+  rows && rows[0] ? rows[0] : { error: "Post creation failed" },
+  { status: rows && rows[0] ? 200 : 500 }
+)
+
   } catch (e: any) {
     return NextResponse.json({ error: e?.message || String(e) }, { status: 500 })
   }
@@ -57,7 +61,11 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     const res = await fetch(restUrl, { headers: makeHeaders(), cache: 'no-store' })
     if (!res.ok) return NextResponse.json({ error: `Supabase error ${res.status}` }, { status: res.status })
     const rows = await res.json()
-    return NextResponse.json(rows?.[0] ?? null)
+    return NextResponse.json(
+  rows && rows[0] ? rows[0] : { error: "Post creation failed" },
+  { status: rows && rows[0] ? 200 : 500 }
+)
+
   } catch (e: any) {
     return NextResponse.json({ error: e?.message || String(e) }, { status: 500 })
   }
