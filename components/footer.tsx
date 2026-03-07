@@ -61,6 +61,9 @@ export default function Footer() {
               <li>
                 <Link href="/contact" className="text-gray-300 hover:text-primary transition">{t('footer.contact')}</Link>
               </li>
+              <li>
+                <Link href="/refund-policy" className="text-gray-300 hover:text-primary transition">{t('footer.refund_policy')}</Link>
+              </li>
             </ul>
           </div>
         </div>

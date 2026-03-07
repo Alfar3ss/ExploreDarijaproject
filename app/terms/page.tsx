@@ -6,8 +6,11 @@ export default function TermsPage() {
   return (
     <main className="max-w-4xl mx-auto px-4 md:px-8 py-12">
       <h1 className="text-2xl font-bold mb-4">ExploreDarija – Terms &amp; Conditions</h1>
-      <p className="text-gray-700 mb-4">Last updated: December 7, 2025</p>
+      <p className="text-gray-700 mb-4">Last updated: March 7, 2026</p>
       <section className="prose prose-sm text-gray-700">
+        <p>ExploreDarija is owned and operated by MEN VINTAGE LTD.</p>
+
+        <p>MEN VINTAGE LTD is the legal entity responsible for the operation, management, and maintenance of the ExploreDarija platform.</p>
         <p>These Terms &amp; Conditions govern your use of ExploreDarija and its services, including Lhajja AI. By using the website, you agree to these terms.</p>
         <h2>1. Use of the Website</h2>
         <p>You agree to use ExploreDarija only for:</p>
@@ -75,11 +78,28 @@ export default function TermsPage() {
           <li>You attempt to harm the system or other users</li>
         </ul>
         <p>You may stop using the website at any time.</p>
-        <h2>8. Third-Party Links</h2>
+        <h2>8. Service Nature</h2>
+
+<p>
+ExploreDarija provides educational language-learning tools through a combination of artificial intelligence systems and human-driven services.
+</p>
+
+<p>
+The Lhajja AI feature generates automated responses using artificial intelligence technology to assist users in learning Moroccan Darija.
+</p>
+
+<p>
+In addition to AI-generated responses, human administrators and educators may review content, improve educational materials, manage the platform, and provide support when necessary and during the online classes.
+</p>
+
+<p>
+By using the platform, you acknowledge that responses and services may involve both automated AI systems and human oversight.
+</p>
+        <h2>9. Third-Party Links</h2>
         <p>ExploreDarija may contain links to third-party websites. We are not responsible for their content or privacy practices.</p>
-        <h2>9. Changes to These Terms</h2>
+        <h2>10. Changes to These Terms</h2>
         <p>We may update these terms at any time. The updated version will always be posted on this page.</p>
-        <h2>10. Contact Us</h2>
+        <h2>11. Contact Us</h2>
         <p>For any questions regarding these Terms &amp; Conditions:</p>
         <ul>
           <li>📩 ichchoun@gmail.com</li>

@@ -20,8 +20,11 @@ export default function PrivacyPage() {
   return (
     <main className="max-w-4xl mx-auto px-4 md:px-8 py-12">
       <h1 className="text-2xl font-bold mb-4">ExploreDarija – Privacy Policy</h1>
-      <p className="text-gray-700 mb-4">Last updated: December 7, 2025</p>
+      <p className="text-gray-700 mb-4">Last updated: March 7, 2026</p>
       <section className="prose prose-sm text-gray-700">
+        <h1>ExploreDarija is owned and operated by MEN VINTAGE LTD.</h1>
+
+        <p>MEN VINTAGE LTD is the legal entity responsible for the operation, management, and maintenance of the ExploreDarija platform.</p>
         <p>ExploreDarija (“we”, “our”, “us”) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website and services, including Lhajja AI.</p>
         <h2>1. Information We Collect</h2>
         <h3>1.1 Information You Provide</h3>
