@@ -243,7 +243,7 @@ export default function PricingPage() {
       href="/booking"
       className="mt-8 block text-center px-8 py-4 bg-primary text-white rounded-xl font-semibold hover:bg-primary-dark transition"
     >
-      Book Your Session — $19.99
+      Book Your Session — $9.99
     </a>
   </div>
 </div>

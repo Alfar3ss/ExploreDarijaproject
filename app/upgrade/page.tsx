@@ -127,13 +127,7 @@ function UpgradePageContent() {
             </ul>
 
             {/* Button */}
-            <button
-              className="mt-10 w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary transition"
-              onClick={() => setShowInvoice(true)}
-              disabled={loadingUpgrade}
-            >
-              Checkout
-            </button>
+           
   
              <button
     onClick={handleUpgradeClick}
