@@ -14,9 +14,9 @@ function makeHeaders(contentType = 'application/json') {
   return h
 }
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = params.id
+    const { id } = await params
     const body = await req.json()
     if (!body) return NextResponse.json({ error: 'Missing body' }, { status: 400 })
 
@@ -41,9 +41,9 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = params.id
+    const { id } = await params
     const restUrl = `${SUPABASE_URL!.replace(/\/$/, '')}/rest/v1/posts?slug=eq.${encodeURIComponent(id)}`
     const headers = makeHeaders(null as any)
     const res = await fetch(restUrl, { method: 'DELETE', headers })
@@ -54,9 +54,9 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
   }
 }
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = params.id
+    const { id } = await params
     const restUrl = `${SUPABASE_URL!.replace(/\/$/, '')}/rest/v1/posts?slug=eq.${encodeURIComponent(id)}&select=*`
     const res = await fetch(restUrl, { headers: makeHeaders(), cache: 'no-store' })
     if (!res.ok) return NextResponse.json({ error: `Supabase error ${res.status}` }, { status: res.status })

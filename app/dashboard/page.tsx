@@ -224,7 +224,7 @@ async function translateMeanings(meanings: string[], target: string) {
 }
 
 export default async function DashboardPage() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const cookie = cookieStore.get('iDarija_session')
   if (!cookie) redirect('/login?redirect=/dashboard')
   const token = cookie.value
@@ -240,7 +240,7 @@ export default async function DashboardPage() {
   if (cookieStoreLang && typeof cookieStoreLang.value === 'string') {
     preferred = cookieStoreLang.value.split(',')[0].split('-')[0].toLowerCase()
   } else {
-    const hdrs = headers()
+    const hdrs = await headers()
     const accept = hdrs.get('accept-language') || ''
     const first = accept.split(',')[0] || 'en'
     preferred = first.split('-')[0].toLowerCase()

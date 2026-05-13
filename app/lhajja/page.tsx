@@ -6,12 +6,12 @@ export const dynamic = 'force-dynamic'
 
 export default async function ChatPage() {
   // determine initial language (cookie or header)
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const cookieLang = cookieStore.get('iDarija_lang')?.value
   let initial = 'en'
   if (cookieLang) initial = cookieLang.split('-')[0]
   else {
-    const hdrs = headers()
+    const hdrs = await headers()
     const accept = hdrs.get('accept-language') || ''
     const first = accept.split(',')[0] || 'en'
     initial = first.split('-')[0]
