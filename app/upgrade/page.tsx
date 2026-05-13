@@ -2,6 +2,10 @@
 import { useState, useEffect, Suspense } from "react"
 import ReactDOM from "react-dom"
 import { useSearchParams, useRouter } from "next/navigation"
+import Script from "next/script"
+
+
+
 
     export default function UpgradePage() {
     return (
@@ -12,6 +16,19 @@ import { useSearchParams, useRouter } from "next/navigation"
 }
 
 function UpgradePageContent() {
+  const [gumroadReady, setGumroadReady] = useState(false)
+  const handleUpgradeClick = () => {
+  if (typeof window !== 'undefined' && (window as any).GumroadOverlay) {
+    (window as any).GumroadOverlay.show('https://forexmadesimple.gumroad.com/l/darijapremium')
+  } else {
+    // fallback: open as popup window (not full tab)
+    window.open(
+      'https://forexmadesimple.gumroad.com/l/darijapremium',
+      'gumroad',
+      'width=650,height=650,left=400,top=100'
+    )
+  }
+}
   const router = useRouter()
   const [authChecked, setAuthChecked] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -47,7 +64,7 @@ function UpgradePageContent() {
   const selectedPlan = params?.get("plan") || "premium"
 
   const plans = {
-    premium: { monthly: 4.99, yearly: 41.91, label: "Premium Plan" },
+    premium: { monthly: 2.99, yearly: 25.11, label: "Premium Plan" },
     standard: { monthly: 5.99, yearly: 49.99, label: "Standard Plan" },
   }
 
@@ -58,10 +75,7 @@ function UpgradePageContent() {
       <div className={`${!authChecked || !isLoggedIn ? 'blur-sm brightness-90 pointer-events-none select-none' : ''}`}>
         <section className="max-w-4xl mx-auto py-20 px-6">
           <h1 className="text-4xl font-bold text-center">Welcome to ExploreDarija Premium!</h1>
-          <p className="text-center text-blue-700 mt-2 text-lg font-semibold">
-            As a new platform, we’re excited to offer our Premium Plan <span className="font-bold">completely free</span> for a limited time.<br />
-            Upgrade now and enjoy all features at <span className="font-bold">no cost</span> — your checkout will show <span className="text-primary">$0</span>.
-          </p>
+          
 
           {/* Plan card */}
           <div className="bg-white border border-gray-200 shadow-lg rounded-2xl p-8 mt-10">
@@ -72,23 +86,37 @@ function UpgradePageContent() {
             {/* Billing Switch (disabled for free) */}
             <div className="mt-6 flex items-center gap-3">
               <span className="text-gray-600 text-sm">Billing:</span>
-              <div className="relative inline-flex rounded-full bg-gray-100 p-1 w-40 opacity-50 pointer-events-none">
-                <div className="absolute top-1 left-1 w-1/2 h-8 bg-white rounded-md shadow" />
-                <button className="relative z-10 w-1/2 text-sm font-medium py-1 text-gray-600">Monthly</button>
-                <button className="relative z-10 w-1/2 text-sm font-medium py-1 text-gray-600">Yearly -30%</button>
-              </div>
-              <span className="ml-2 text-primary font-semibold">Free for now!</span>
-            </div>
+              <div className="relative inline-flex rounded-full bg-gray-100 p-1 w-40">
+              <div  className={`absolute top-1 h-8 w-1/2 bg-white rounded-md shadow transition-all duration-200 ${
+      billing === "yearly" ? "left-[50%]" : "left-1"
+    }`}
+  />
+  <button
+    onClick={() => setBilling("monthly")}
+    className={`relative z-10 w-1/2 text-sm font-medium py-1 ${
+      billing === "monthly" ? "text-gray-900" : "text-gray-500"
+    }`}
+  >
+    Monthly
+  </button>
+  <button
+    onClick={() => setBilling("yearly")}
+    className={`relative z-10 w-1/2 text-sm font-medium py-1 ${
+      billing === "yearly" ? "text-gray-900" : "text-gray-500"
+    }`}
+  >
+    Yearly -30%
+  </button>
+</div>
+</div>
 
             {/* Price */}
-            <div className="mt-8">
-              <div className="text-4xl font-bold">
-                $0
-              </div>
-              <div className="text-sm text-gray-500 mt-1">
-                Limited time offer — no payment required
-              </div>
-            </div>
+            <div className="text-4xl font-bold">
+  ${billing === "monthly" ? plan.monthly : plan.yearly}
+</div>
+<div className="text-sm text-gray-500 mt-1">
+  per {billing === "monthly" ? "month" : "year"}
+</div>
 
             {/* Features */}
             <ul className="mt-8 text-gray-700 space-y-3 leading-relaxed">
@@ -104,8 +132,22 @@ function UpgradePageContent() {
               onClick={() => setShowInvoice(true)}
               disabled={loadingUpgrade}
             >
-              Upgrade for Free
+              Checkout
             </button>
+  
+             <button
+    onClick={handleUpgradeClick}
+    className="w-full bg-primary text-white py-3 rounded-xl font-semibold"
+  >
+    Upgrade to Premium
+  </button>
+
+  <Script
+    src="https://gumroad.com/js/gumroad.js"
+    strategy="afterInteractive"
+    onLoad={() => setGumroadReady(true)}
+  />
+
           </div>
         </section>
       </div>
@@ -128,8 +170,7 @@ function UpgradePageContent() {
               <tbody>
                 <tr className="border-b"><td className="py-2 px-4 font-semibold">User</td><td className="py-2 px-4">{user?.email}</td></tr>
                 <tr className="border-b"><td className="py-2 px-4 font-semibold">Plan</td><td className="py-2 px-4">Premium</td></tr>
-                <tr className="border-b"><td className="py-2 px-4 font-semibold">Duration</td><td className="py-2 px-4">3 months free</td></tr>
-                <tr><td className="py-2 px-4 font-semibold">Total</td><td className="py-2 px-4 text-green-700 font-bold">$0</td></tr>
+                <tr><td className="py-2 px-4 font-semibold">Total</td><td className="py-2 px-4 text-green-700 font-bold">${billing === "monthly" ? plan.monthly : plan.yearly}</td></tr>
               </tbody>
             </table>
             <button
@@ -161,7 +202,7 @@ function UpgradePageContent() {
                 setLoadingUpgrade(false)
               }}
             >
-              {loadingUpgrade ? 'Processing...' : 'Checkout'}
+              {loadingUpgrade ? 'Processing...' : 'Pay Now'}
             </button>
             <button
               className="w-full mt-2 py-2 rounded-xl font-semibold text-gray-600 hover:bg-gray-100 transition"

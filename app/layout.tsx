@@ -7,6 +7,7 @@ import { LanguageProvider } from '../components/language-provider'
 import Spinner from '../components/spinner'
 import { usePathname } from 'next/navigation'
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Script from 'next/script'
 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					</React.Suspense>
 					<div className={loading ? 'pointer-events-none select-none blur-sm transition-all duration-300' : 'transition-all duration-300'}>
 						{children}
+						<Script src="https://gumroad.com/js/gumroad.js" strategy="afterInteractive" />
 						<React.Suspense fallback={null}>
 							<Footer />
 						</React.Suspense>

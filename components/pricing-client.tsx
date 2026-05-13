@@ -24,7 +24,7 @@ export default function PricingPage() {
   const plans = {
     free: { monthly: 0 },
     standard: { monthly: 5.99 },
-    premium: { monthly: 29.99 },
+    premium: { monthly: 2.99 },
   }
 
   const getYearlyPrice = (plan: keyof typeof plans) => {
@@ -38,7 +38,7 @@ export default function PricingPage() {
     if (billing === "monthly") return `$${p.monthly}`
     const yearly = getYearlyPrice(plan)
     const perMonth = Math.round((yearly / 12) * 10) / 10
-    return `$${yearly} / year (${perMonth}/mo)`
+    return `$${yearly}`
   }
 
   const CheckIcon = ({ className = "w-5 h-5 text-green-500" }: { className?: string }) => (
@@ -128,12 +128,7 @@ export default function PricingPage() {
 
     {/* PREMIUM */}
     <div className="relative bg-white border-2 border-primary rounded-2xl p-8 shadow-lg flex flex-col md:scale-105 overflow-hidden">
-      {/* Ribbon badge (top-right) */}
-      <div className="absolute top-0 right-0">
-        <span className="inline-block bg-gradient-to-r from-orange-400 via-yellow-500 to-white-500 text-white text-[11px] font-bold tracking-wide px-3 py-1 rounded-bl-lg shadow-lg translate-x-1 -translate-y-1 ring-1 ring-white/40 backdrop-blur-sm">
-          FREE • 3 MONTHS
-        </span>
-      </div>
+      
 
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-semibold text-gray-900">Premium Plan</h3>
@@ -144,19 +139,14 @@ export default function PricingPage() {
         Full access to lessons, tools & Lhajja AI.
       </p>
 
-      <div className="mt-6 flex flex-col items-center gap-2">
-        <div className="flex items-center gap-2">
-          <span className="text-2xl font-extrabold text-gray-400 line-through">$4.99</span>
-          <span className="text-3xl font-extrabold text-primary">$0</span>
+      <div className="mt-6">
+        <div className="text-3xl font-bold text-gray-900">{priceLabel('premium')}</div>
+        <div className="text-sm text-gray-500">
+          <div className="text-xs text-gray-400">Billed {billing === 'yearly' ? 'yearly' : 'monthly'}</div>
+          <div className="text-xs text-gray-400">cancel anytime</div>
         </div>
-        <span className="text-xs font-semibold text-green-700 bg-green-100 px-2 py-1 rounded-full">
-          We're offering the Premium Plan free for 3 months as we launch!
-        </span>
       </div>
-
-      <div className="text-sm text-gray-500 mt-2">
-        Limited time offer — no payment required
-      </div>
+     
 
       <ul className="mt-6 space-y-3 text-gray-800 flex-1 leading-relaxed">
         <li className="flex gap-2"><CheckIcon /> Unlimited translations</li>
@@ -206,16 +196,19 @@ export default function PricingPage() {
       </p>
 
       <div className="mt-6">
-        <div className="text-3xl font-bold text-gray-900">$19.99</div>
-        <div className="text-sm text-gray-500">per session</div>
+        <div className="text-3xl font-bold text-gray-900">$9.99</div>
+        <div className="text-sm text-gray-500">per session 1H </div>
       </div>
 
       <ul className="mt-6 space-y-3 text-gray-700 flex-1 leading-relaxed">
+        <li className="flex gap-2">Everything in Premium</li>
+        <li className="flex gap-2"><CheckIcon /> A free trial session</li>
         <li className="flex gap-2"><CheckIcon /> Live Zoom conversation</li>
         <li className="flex gap-2"><CheckIcon /> Learn real-life Darija</li>
         <li className="flex gap-2"><CheckIcon /> Culture & travel help</li>
         <li className="flex gap-2"><CheckIcon /> Learn Moroccan food basics</li>
         <li className="flex gap-2"><CheckIcon /> Includes Premium for 3 months</li>
+        <div className="text-sm text-gray-500">If you are not satisfied after the free trial, you will get full refund.</div>
       </ul>
 
       <a href="/booking" className="mt-6 block text-center px-6 py-3 border rounded-lg font-semibold hover:bg-gray-50 transition">
