@@ -19,11 +19,11 @@ function UpgradePageContent() {
   const [gumroadReady, setGumroadReady] = useState(false)
   const handleUpgradeClick = () => {
   if (typeof window !== 'undefined' && (window as any).GumroadOverlay) {
-    (window as any).GumroadOverlay.show('https://forexmadesimple.gumroad.com/l/darijapremium')
+    (window as any).GumroadOverlay.show('upgrade.exploredarija.com')
   } else {
     // fallback: open as popup window (not full tab)
     window.open(
-      'https://forexmadesimple.gumroad.com/l/darijapremium',
+      'upgrade.exploredarija.com',
       'gumroad',
       'width=650,height=650,left=400,top=100'
     )
