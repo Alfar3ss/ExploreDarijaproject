@@ -14,13 +14,16 @@ export default async function PostPage({ params }: { params: { id: string } }) {
 
   try {
     if (!SUPABASE_URL || !SUPABASE_KEY) throw new Error('Supabase not configured')
-    const restUrl = `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/posts?slug=eq.${encodeURIComponent(slug)}&select=*`
-    const res = await fetch(restUrl, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, Accept: 'application/json' }, cache: 'no-store' })
+    
+    // Try querying by slug first, then by id as fallback
+    let restUrl = `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/posts?or=(slug.eq.${encodeURIComponent(slug)},id.eq.${encodeURIComponent(slug)})&select=*`
+    let res = await fetch(restUrl, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, Accept: 'application/json' }, cache: 'no-store' })
+    
     if (!res.ok) {
       return (<main className="min-h-screen bg-white text-gray-800"><section className="max-w-4xl mx-auto py-20 px-6"> <div className="text-center text-gray-600">Post not found</div></section></main>)
     }
-    const rows = await res.json()
-    const row = Array.isArray(rows) && rows.length ? rows[0] : null
+    let rows = await res.json()
+    let row = Array.isArray(rows) && rows.length ? rows[0] : null
     if (!row) return (<main className="min-h-screen bg-white text-gray-800"><section className="max-w-4xl mx-auto py-20 px-6"> <div className="text-center text-gray-600">Post not found</div></section></main>)
 
     const post = {
@@ -64,7 +67,8 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   if (!slug || !SUPABASE_URL || !SUPABASE_KEY) return {}
   try {
-    const restUrl = `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/posts?slug=eq.${encodeURIComponent(slug)}&select=*`
+    // Try querying by slug first, then by id as fallback
+    const restUrl = `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/posts?or=(slug.eq.${encodeURIComponent(slug)},id.eq.${encodeURIComponent(slug)})&select=*`
     const res = await fetch(restUrl, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, Accept: 'application/json' }, cache: 'no-store' })
     if (!res.ok) return {}
     const rows = await res.json()

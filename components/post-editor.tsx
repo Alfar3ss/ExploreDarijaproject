@@ -1,12 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import dynamic from "next/dynamic"
-
-// TinyMCE – load client-side only
-const Editor = dynamic(() => import("@tinymce/tinymce-react").then(m => m.Editor), {
-  ssr: false,
-})
+import TiptapEditor from "./tiptap-editor"
 
 type Post = {
   slug: string
@@ -54,8 +49,6 @@ export default function PostEditor({ initial, onSave, onCancel }: {
   const [customSlug, setCustomSlug] = useState(initial?.slug || "")
   // Compute slug for display and saving
   const slug = customSlug || (title ? slugify(title) : "")
-
-  const [mode, setMode] = useState<"visual" | "html">("visual")
 
   const handleImage = (file?: File) => {
     if (!file) return
@@ -148,48 +141,11 @@ export default function PostEditor({ initial, onSave, onCancel }: {
         </div>
       </div>
 
-      {/* EDITOR MODE SWITCH */}
-      <div className="flex gap-2 mb-2">
-        <button
-          onClick={() => setMode("visual")}
-          className={`px-3 py-1 rounded border ${mode === "visual" ? "bg-blue-500 text-white" : ""}`}
-        >
-          Visual Editor
-        </button>
-        <button
-          onClick={() => setMode("html")}
-          className={`px-3 py-1 rounded border ${mode === "html" ? "bg-blue-500 text-white" : ""}`}
-        >
-          HTML Editor
-        </button>
+      {/* TIPTAP EDITOR */}
+      <div className="mb-4">
+        <label className="block text-sm font-semibold mb-2">Content</label>
+        <TiptapEditor value={content} onChange={setContent} />
       </div>
-
-      {/* VISUAL MODE */}
-      {mode === "visual" && (
-        <Editor
-          value={content}
-          onEditorChange={setContent}
-          tinymceScriptSrc={`https://cdn.tiny.cloud/1/${process.env.NEXT_PUBLIC_TINYMCE_API_KEY}/tinymce/6/tinymce.min.js`}
-          init={{
-            height: 300,
-            menubar: false,
-            plugins: "link image lists code table",
-            toolbar:
-              "undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist | link image | code",
-            branding: false,
-          }}
-        />
-      )}
-
-      {/* HTML MODE */}
-      {mode === "html" && (
-        <textarea
-          value={content}
-          onChange={e => setContent(e.target.value)}
-          className="w-full border rounded px-3 py-2"
-          rows={12}
-        />
-      )}
 
       {/* SEO */}
       <div className="mt-4 border-t pt-3">

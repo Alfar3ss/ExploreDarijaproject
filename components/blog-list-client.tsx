@@ -2,6 +2,7 @@
 import React, { useMemo, useState } from 'react'
 import { MotionDiv } from './motion-div'
 import { useT } from './use-t'
+import Link from 'next/link'
 
 type Post = {
   id: string
@@ -85,7 +86,7 @@ export default function BlogListClient({ initialPosts }: { initialPosts: Post[] 
                   <p className="mt-4 text-gray-700 leading-relaxed">{featured.excerpt}</p>
                   <div className="mt-4 flex items-center gap-3">
                     {featured.audioDarija && <button onClick={() => playDarija(featured.audioDarija)} className="px-4 py-2 bg-white border rounded-md shadow-sm hover:bg-gray-50">🔊 Play</button>}
-                    <a href={`/blog/${featured.id}`} className="ml-2 inline-block px-4 py-2 bg-primary text-white rounded-md shadow hover:bg-primary-dark">Read featured →</a>
+                    <Link href={`/blog/${encodeURIComponent(featured.id)}`} className="ml-2 inline-block px-4 py-2 bg-primary text-white rounded-md shadow hover:bg-primary-dark">Read featured →</Link>
                   </div>
                 </div>
               </div>
@@ -104,7 +105,7 @@ export default function BlogListClient({ initialPosts }: { initialPosts: Post[] 
                   </div>
                   <div className="flex-shrink-0 flex flex-col items-end gap-3">
                     {p.audioDarija && <button onClick={() => playDarija(p.audioDarija)} className="px-3 py-2 bg-gray-100 rounded hover:bg-gray-200">🔊</button>}
-                    <a href={`/blog/${p.id}`} className="text-sm text-primary font-medium hover:underline">Read →</a>
+                    <Link href={`/blog/${encodeURIComponent(p.id)}`} className="text-sm text-primary font-medium hover:underline">Read →</Link>
                   </div>
                 </div>
               </article>
@@ -123,10 +124,10 @@ export default function BlogListClient({ initialPosts }: { initialPosts: Post[] 
             <h4 className="font-semibold text-lg">{t('blog.recent_posts')}</h4>
             <div className="mt-3 space-y-3">
               {posts.slice(0,3).map((r) => (
-                <a key={r.id} href={`/blog/${r.id}`} className="block p-3 rounded-lg hover:bg-gray-50 border border-transparent hover:border-gray-100 transition">
+                <Link key={r.id} href={`/blog/${encodeURIComponent(r.id)}`} className="block p-3 rounded-lg hover:bg-gray-50 border border-transparent hover:border-gray-100 transition">
                   <div className="text-sm font-medium text-gray-900">{r.title}</div>
                   <div className="text-xs text-gray-500">{r.date}</div>
-                </a>
+                </Link>
               ))}
             </div>
           </div>

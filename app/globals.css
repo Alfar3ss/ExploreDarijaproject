@@ -17,3 +17,113 @@
 		color: var(--color-primary);
 	}
 }
+
+/* Tiptap Editor Styles */
+.ProseMirror {
+	outline: none;
+	line-height: 1.6;
+}
+
+.ProseMirror > * + * {
+	margin-top: 0.75em;
+}
+
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+	line-height: 1.1;
+	em {
+		font-style: italic;
+	}
+}
+
+.ProseMirror h1 {
+	font-size: 2em;
+	font-weight: 700;
+}
+
+.ProseMirror h2 {
+	font-size: 1.5em;
+	font-weight: 700;
+}
+
+.ProseMirror h3 {
+	font-size: 1.25em;
+	font-weight: 700;
+}
+
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+	font-weight: 700;
+}
+
+.ProseMirror code {
+	background-color: rgba(0, 0, 0, 0.1);
+	color: #616161;
+	padding: 0.125em 0.25em;
+	border-radius: 0.25em;
+	font-size: 0.9em;
+	font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.ProseMirror pre {
+	background: #0d0d0d;
+	color: #fff;
+	font-family: 'JetBrains Mono', monospace;
+	padding: 0.75rem 1rem;
+	border-radius: 0.5rem;
+	overflow-x: auto;
+}
+
+.ProseMirror pre code {
+	color: inherit;
+	padding: 0;
+	background: none;
+	font-size: 0.9em;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+	padding-left: 1.5rem;
+}
+
+.ProseMirror li {
+	margin-bottom: 0.5em;
+}
+
+.ProseMirror blockquote {
+	padding-left: 1rem;
+	border-left: 2px solid var(--color-primary);
+	margin-left: 0;
+	color: #6b7280;
+	font-style: italic;
+}
+
+.ProseMirror table {
+	border-collapse: collapse;
+	margin: 0;
+	overflow: auto;
+	width: 100%;
+}
+
+.ProseMirror table td,
+.ProseMirror table th {
+	border: 1px solid #ddd;
+	padding: 10px 15px;
+	text-align: left;
+}
+
+.ProseMirror table th {
+	background-color: #f5f5f5;
+	font-weight: 700;
+}
+
+.ProseMirror hr {
+	border: none;
+	border-top: 2px solid var(--color-primary);
+	margin: 1rem 0;
+}

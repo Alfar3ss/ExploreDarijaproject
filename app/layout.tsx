@@ -31,6 +31,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					<div className={loading ? 'pointer-events-none select-none blur-sm transition-all duration-300' : 'transition-all duration-300'}>
 						{children}
 						<Script src="https://gumroad.com/js/gumroad.js" strategy="afterInteractive" />
+						<Script
+  src="https://js.whop.com/static/checkout/loader.js"
+  strategy="afterInteractive"
+/>
 						<React.Suspense fallback={null}>
 							<Footer />
 						</React.Suspense>

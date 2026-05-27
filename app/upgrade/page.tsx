@@ -3,6 +3,7 @@ import { useState, useEffect, Suspense } from "react"
 import ReactDOM from "react-dom"
 import { useSearchParams, useRouter } from "next/navigation"
 import Script from "next/script"
+import { WhopCheckoutEmbed } from "@whop/checkout/react"
 
 
 
@@ -17,6 +18,7 @@ import Script from "next/script"
 
 function UpgradePageContent() {
   const [gumroadReady, setGumroadReady] = useState(false)
+  const [showCheckout, setShowCheckout] = useState(false)
   const handleUpgradeClick = () => {
   if (typeof window !== 'undefined' && (window as any).GumroadOverlay) {
     (window as any).GumroadOverlay.show('upgrade.exploredarija.com')
@@ -58,6 +60,12 @@ function UpgradePageContent() {
     return () => { mounted = false }
   }, [router])
   const params = useSearchParams()
+  useEffect(() => {
+  if (params?.get('success') === 'true') {
+    setShowCheckout(false)
+    setShowCongrats(true)
+  }
+}, [params])
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly")
 
   // Selected plan (default = premium)
@@ -129,12 +137,23 @@ function UpgradePageContent() {
             {/* Button */}
            
   
-             <button
-    onClick={handleUpgradeClick}
-    className="w-full bg-primary text-white py-3 rounded-xl font-semibold"
-  >
-    Upgrade to Premium
-  </button>
+             {/* Button */}
+<button
+  className="mt-10 w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary-dark transition"
+  onClick={() => setShowCheckout(!showCheckout)}
+>
+  {showCheckout ? 'Hide Checkout' : 'Upgrade to Premium →'}
+</button>
+
+{/* Embedded Whop Checkout - slides down */}
+{showCheckout && (
+  <div className="mt-6 transition-all duration-300">
+    <WhopCheckoutEmbed
+  planId="plan_VzBOD8vHBbJHp"
+  returnUrl={`${typeof window !== 'undefined' ? window.location.origin : 'https://www.exploredarija.com'}/upgrade?success=true`}
+/>
+  </div>
+)}
 
   <Script
     src="https://gumroad.com/js/gumroad.js"
