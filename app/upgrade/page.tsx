@@ -75,7 +75,10 @@ function UpgradePageContent() {
     premium: { monthly: 2.99, yearly: 25.11, label: "Premium Plan" },
     standard: { monthly: 5.99, yearly: 49.99, label: "Standard Plan" },
   }
-
+  const WHOP_PLANS = {
+  monthly: 'plan_5GADcR5L0akua',
+  yearly: 'plan_N8FvYghwGFV1Z'
+  }
   const plan = plans[selectedPlan as keyof typeof plans]
 
   return (
@@ -138,22 +141,34 @@ function UpgradePageContent() {
            
   
              {/* Button */}
+{/* Button */}
 <button
   className="mt-10 w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary-dark transition"
-  onClick={() => setShowCheckout(!showCheckout)}
+  onClick={() => setShowCheckout(true)}
 >
-  {showCheckout ? 'Hide Checkout' : 'Upgrade to Premium →'}
+  Upgrade to Premium →
 </button>
 
-{/* Embedded Whop Checkout - slides down */}
-{showCheckout && (
-  <div className="mt-6 transition-all duration-300">
-    <WhopCheckoutEmbed
-  planId="plan_VzBOD8vHBbJHp"
-  returnUrl={`${typeof window !== 'undefined' ? window.location.origin : 'https://www.exploredarija.com'}/upgrade?success=true`}
-/>
-  </div>
-)}
+{/* Checkout Modal */}
+{showCheckout && typeof window !== 'undefined' && ReactDOM.createPortal(
+  <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 p-4">
+    <div className="bg-white rounded-2xl shadow-2xl p-4 w-[720px] max-h-[85vh] overflow-y-auto">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-base font-bold text-gray-900">Complete your purchase</h3>
+        <button
+          onClick={() => setShowCheckout(false)}
+          className="text-gray-400 hover:text-gray-600 text-xl font-light"
+        >
+          ×
+        </button>
+      </div>
+      <WhopCheckoutEmbed
+        planId={WHOP_PLANS[billing]}
+        returnUrl={`${typeof window !== 'undefined' ? window.location.origin : 'https://www.exploredarija.com'}/upgrade?success=true`}
+      />
+    </div>
+  </div>, document.body)
+}
 
   <Script
     src="https://gumroad.com/js/gumroad.js"

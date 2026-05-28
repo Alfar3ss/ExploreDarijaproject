@@ -1,0 +1,51 @@
+[
+  {
+    "slug": "test",
+    "title": "test",
+    "description": "ttt",
+    "excerpt": "eee",
+    "content": "<p>wwwzz</p>",
+    "meta_title": "zzzz",
+    "meta_description": "zzzz",
+    "meta_keywords": "zzz",
+    "canonical_url": "/blog/test",
+    "meta_robots": "index, follow",
+    "category": "Insights",
+    "featured": true,
+    "date": "2026-05-28T16:09:31.953Z"
+  },
+  {
+    "slug": "learn-darija-basics",
+    "title": "Learn Darija Basics: Key Phrases for Every Traveler",
+    "description": "Start speaking Moroccan Darija with the essential phrases you need for travel, food, and local conversation.",
+    "excerpt": "Master essential Darija travel phrases for greetings, food ordering, and everyday conversations in Morocco.",
+    "content": "<p>Moroccan Darija is a living language shaped by history, food, and daily life. Start with these practical expressions to connect quickly with locals:</p><h2>🔹 Greetings and polite phrases</h2><ul><li><strong>Salam 3likom</strong> — Hello / Peace be upon you.</li><li><strong>Labas?</strong> — How are you?</li><li><strong>Shukran</strong> — Thank you.</li></ul><h2>🔹 Ask for directions</h2><ul><li><strong>Fin kayn ...?</strong> — Where is ...?</li><li><strong>Bsh7al?</strong> — How much?</li><li><strong>3afak</strong> — Please.</li></ul><p>Use these phrases with a friendly smile and you'll build instant rapport with shopkeepers, drivers, and hosts.</p>",
+    "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
+    "meta_title": "Learn Darija Basics | Essential Moroccan Phrases",
+    "meta_description": "Get started with Moroccan Darija using the most useful phrases for travel, food, and conversation.",
+    "meta_keywords": "Darija, Moroccan Arabic, travel phrases, greetings, Moroccan culture",
+    "canonical_url": "/blog/learn-darija-basics",
+    "meta_robots": "index, follow",
+    "og_image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
+    "category": "Language",
+    "featured": true,
+    "date": "2026-05-28T08:00:00.000Z"
+  },
+  {
+    "slug": "moroccan-food-words",
+    "title": "Must-Know Moroccan Food Words for a Great Meal",
+    "description": "Navigate souks and menus with confidence by learning the most important Darija food words and ordering tips.",
+    "excerpt": "Learn the Moroccan Darija food vocabulary that makes eating at a market, restaurant, or cafe easier and more fun.",
+    "content": "<p>Eating in Morocco is a joyful experience. These key words help you order and explore the best dishes without confusion.</p><h2>🍲 Common food words</h2><ul><li><strong>Ta3am</strong> — Food</li><li><strong>Atay</strong> — Tea</li><li><strong>Khobz</strong> — Bread</li></ul><h2>🧾 Ordering phrases</h2><ul><li><strong>Bghit ...</strong> — I want ...</li><li><strong>Mashi bzzaf</strong> — Not too much.</li><li><strong>Za3ma</strong> — Really?</li></ul><p>With these words, your market meals become part of the story rather than a stressful task.</p>",
+    "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
+    "meta_title": "Moroccan Food Words | Darija Vocabulary for Meals",
+    "meta_description": "Build your Darija vocabulary with the most useful Moroccan food words so you can order confidently.",
+    "meta_keywords": "Moroccan food, Darija vocabulary, restaurant phrases, souk, menus",
+    "canonical_url": "/blog/moroccan-food-words",
+    "meta_robots": "index, follow",
+    "og_image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
+    "category": "Culture",
+    "featured": false,
+    "date": "2026-05-25T08:00:00.000Z"
+  }
+]

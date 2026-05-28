@@ -78,7 +78,7 @@ export default function AdminDashboard() {
             <h2 className="text-xl font-semibold mb-2 text-blue-800">Admin Tools</h2>
             <div className="flex flex-col gap-3">
               <a href="/dashboard/users" className="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium shadow hover:bg-blue-700 transition">Manage Users</a>
-              <a href="/dashboard/posts" className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium shadow hover:bg-indigo-700 transition">Manage Posts</a>
+              <a href="/admin/blogger" className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium shadow hover:bg-indigo-700 transition">Manage Posts</a>
               <a href="/dashboard/comments" className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium shadow hover:bg-green-700 transition">Review Comments</a>
             </div>
           </div>

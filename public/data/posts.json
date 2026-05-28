@@ -1,5 +1,19 @@
 [
   {
+    "id": "post-1779978791327",
+    "slug": "post-1779978791327",
+    "title": "nnn",
+    "description": "nn",
+    "content": "<p>ttt</p>",
+    "published": false,
+    "createdAt": 1779978805882,
+    "meta_title": "",
+    "meta_description": "",
+    "meta_keywords": "",
+    "canonical_url": "/blog/post-1779978791327",
+    "meta_robots": ""
+  },
+  {
     "id": "learn-phrases",
     "title": "5 Essential Phrases to Use in Moroccan Markets",
     "excerpt": "Short, practical phrases to help you bargain, ask for prices, and be polite in the souk.",
@@ -8,7 +22,9 @@
     "readingTime": "3 min",
     "featured": true,
     "audioDarija": "Afak, sh7al had?",
-    "content": "In the souk you'll need a few phrases to be friendly and effective. 1) Afak - please / excuse me; 2) Sh7al hada? - How much is this? ..."
+    "content": "In the souk you'll need a few phrases to be friendly and effective. 1) Afak - please / excuse me; 2) Sh7al hada? - How much is this? ...",
+    "published": true,
+    "slug": "learn-phrases"
   },
   {
     "id": "pronunciation-tips",
@@ -18,7 +34,9 @@
     "category": "Language Tips",
     "readingTime": "5 min",
     "audioDarija": "Smaḥ liya, ma smaʿt-ksh",
-    "content": "This short guide covers a few distinctive Darija sounds and tips to practice them with local speakers. Start with the emphatic consonants..."
+    "content": "This short guide covers a few distinctive Darija sounds and tips to practice them with local speakers. Start with the emphatic consonants...",
+    "published": true,
+    "slug": "pronunciation-tips"
   },
   {
     "id": "street-stories",
@@ -28,7 +46,9 @@
     "category": "Stories",
     "readingTime": "4 min",
     "audioDarija": "Aji nshufu, fin ghadi?",
-    "content": "We asked locals to share short stories. In Casablanca, you will hear a mixture of modern and traditional expressions..."
+    "content": "We asked locals to share short stories. In Casablanca, you will hear a mixture of modern and traditional expressions...",
+    "published": true,
+    "slug": "street-stories"
   },
   {
     "id": "fast-learning",
@@ -37,7 +57,9 @@
     "date": "2025-08-12",
     "category": "Tips",
     "readingTime": "3 min",
-    "content": "Set a small daily goal, use spaced repetition, and practice in real contexts. The secret is consistency and friendly mistakes."
+    "content": "Set a small daily goal, use spaced repetition, and practice in real contexts. The secret is consistency and friendly mistakes.",
+    "published": true,
+    "slug": "fast-learning"
   },
   {
     "id": "travel-vocab",
@@ -46,7 +68,9 @@
     "date": "2025-07-05",
     "category": "Travel",
     "readingTime": "4 min",
-    "content": "From taxi phrases to ordering tajine, here are the words you'll need to get around and enjoy local food."
+    "content": "From taxi phrases to ordering tajine, here are the words you'll need to get around and enjoy local food.",
+    "published": true,
+    "slug": "travel-vocab"
   },
   {
     "id": "cultural-notes",
@@ -55,6 +79,8 @@
     "date": "2025-06-20",
     "category": "Culture",
     "readingTime": "5 min",
-    "content": "Hospitality is central to Moroccan life. When someone invites you for tea, it's an expression of welcome..."
+    "content": "Hospitality is central to Moroccan life. When someone invites you for tea, it's an expression of welcome...",
+    "published": true,
+    "slug": "cultural-notes"
   }
 ]

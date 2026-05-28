@@ -1,53 +1,36 @@
-import BlogListClient from "../../components/blog-list-client"
+import BlogListClient from '../../components/blog-list-client'
+import { getAllPosts } from '../../lib/blog-data'
 
 export const metadata = {
-  title: 'Blog - ExploreDarija',
-  description: 'Read the latest articles, tips, and updates about learning Darija (Moroccan Arabic) on the ExploreDarija blog.',
-};
-
-export const dynamic = 'force-dynamic'
-
-const SUPABASE_URL = process.env.SUPABASE_URL
-const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
-
-function readingTimeFromContent(html?: string){
-  if (!html) return '1 min read'
-  const text = html.replace(/<[^>]+>/g, ' ')
-  const words = text.trim().split(/\s+/).filter(Boolean).length
-  const mins = Math.max(1, Math.round(words / 200))
-  return `${mins} min read`
+  title: 'Blog | ExploreDarija',
+  description: 'Explore Darija culture, language, and travel tips with in-depth blog posts crafted for learners and visitors.',
 }
 
-export default async function BlogPage(){
-  if (!SUPABASE_URL || !SUPABASE_KEY) return (
-    <main className="min-h-screen bg-white text-gray-800"><section className="max-w-6xl mx-auto py-16 px-6"> <div className="text-center text-gray-600">Missing Supabase config</div></section></main>
+export default async function BlogPage() {
+  const posts = await getAllPosts()
+  const initialPosts = posts.map((post) => ({
+    id: post.slug,
+    title: post.title,
+    excerpt: post.excerpt || post.description,
+    date: post.date || new Date().toISOString(),
+    category: post.category || 'Insights',
+    readingTime: `${Math.max(3, Math.ceil((post.content || '').split(' ').length / 180))} min read`,
+    featured: post.featured,
+  }))
+
+  return (
+    <main className="min-h-screen bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl">
+        <div className="rounded-3xl bg-gradient-to-r from-slate-950 via-slate-800 to-slate-900 px-8 py-16 text-white shadow-2xl shadow-slate-900/10">
+          <p className="text-sm uppercase tracking-[0.35em] text-cyan-300">ExploreDarija Blog</p>
+          <h1 className="mt-4 text-5xl font-extrabold tracking-tight">Learn Darija with stories, culture, and travel insight.</h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-200">Discover fresh articles, vocabulary guides, local tips, and practical conversations for anyone who wants to experience Morocco in the native language.</p>
+        </div>
+
+        <div className="mt-10">
+          <BlogListClient initialPosts={initialPosts} />
+        </div>
+      </div>
+    </main>
   )
-
-  try{
-    const restUrl = `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/posts?select=*&published=eq.true&order=published_at.desc.nullslast`
-    const res = await fetch(restUrl, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, Accept: 'application/json' }, cache: 'no-store' })
-    const rows = await res.json()
-    const posts = (Array.isArray(rows) ? rows : []).map((p:any) => ({
-      id: p.slug || p.id,
-      title: p.title,
-      excerpt: p.meta_description || p.description || (p.content ? p.content.replace(/<[^>]+>/g,'').slice(0,160) : ''),
-      date: p.published_at ? new Date(p.published_at).toLocaleDateString() : (p.created_at ? new Date(p.created_at).toLocaleDateString() : ''),
-      category: p.category || 'Blog',
-      readingTime: readingTimeFromContent(p.content),
-      audioDarija: p.audioDarija,
-      content: p.content || '',
-      featured: p.featured || false
-    }))
-
-    return (
-      <main className="min-h-screen bg-white text-gray-800">
-        <section className="max-w-6xl mx-auto py-16 px-6">
-          <BlogListClient initialPosts={posts} />
-        </section>
-      </main>
-    )
-  }catch(e:any){
-    console.error(e)
-    return (<main className="min-h-screen bg-white text-gray-800"><section className="max-w-6xl mx-auto py-16 px-6"> <div className="text-center text-gray-600">Error loading posts</div></section></main>)
-  }
 }
