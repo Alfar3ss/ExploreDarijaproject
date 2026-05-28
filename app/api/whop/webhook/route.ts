@@ -8,14 +8,14 @@ export async function POST(req: Request) {
     const body = await req.json()
     console.log('🔔 Whop webhook:', JSON.stringify(body))
 
-    const event = body.event
+    const event = body.type || body.data?.type  // ✅ fixed
     const email = body.data?.user?.email
 
     console.log('📧 Event:', event, '| Email:', email)
 
     if (!email) return NextResponse.json({ error: 'No email' }, { status: 400 })
 
-    if (event === 'membership_activated' || event === 'payment_succeeded') {
+    if (event === 'membership.activated' || event === 'payment.succeeded') {  // ✅ fixed
       const patchRes = await fetch(
         `${SUPABASE_URL}/rest/v1/users?email=eq.${encodeURIComponent(email)}`,
         {
