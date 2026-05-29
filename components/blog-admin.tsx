@@ -181,15 +181,23 @@ export default function BlogAdmin() {
                         <td className="px-4 py-4 text-slate-500">{post.category || 'Insights'}</td>
                         <td className="px-4 py-4 text-slate-500">{post.date ? new Date(post.date).toLocaleDateString() : '—'}</td>
                         <td className="px-4 py-4">
-                          <button
-                            onClick={() => {
-                              setSelectedSlug(post.slug)
-                              setIsEditorOpen(true)
-                            }}
-                            className="rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition"
-                          >
-                            Edit
-                          </button>
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={() => {
+                                setSelectedSlug(post.slug)
+                                setIsEditorOpen(true)
+                              }}
+                              className="rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => deletePost(post.slug)}
+                              className="rounded-full bg-red-600 px-3 py-2 text-xs font-semibold text-white hover:bg-red-700 transition"
+                            >
+                              Delete
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))
@@ -248,9 +256,9 @@ export default function BlogAdmin() {
       </div>
 
       {isEditorOpen ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-6xl overflow-y-auto rounded-3xl bg-white shadow-2xl ring-1 ring-black/10">
-            <div className="flex items-center justify-between border-b border-slate-200 px-6 py-5">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/50 p-4">
+          <div className="mx-auto flex min-h-full w-full max-w-6xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-black/10">
+            <div className="flex flex-col gap-4 border-b border-slate-200 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-sm uppercase tracking-[0.35em] text-primary">{selectedPost ? 'Edit Post' : 'New Post'}</p>
                 <h2 className="mt-2 text-2xl font-semibold text-slate-900">Write and optimize</h2>
@@ -265,7 +273,7 @@ export default function BlogAdmin() {
                 Close
               </button>
             </div>
-            <div className="p-6">
+            <div className="max-h-[calc(100vh-6rem)] overflow-y-auto p-6">
               <PostEditor
                 initial={selectedPost || undefined}
                 onSave={(post) => {

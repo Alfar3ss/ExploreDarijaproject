@@ -1,9 +1,9 @@
 import { getAllPosts } from '../../lib/blog-data'
 
 export async function GET() {
-  const siteUrl = process.env.SITE_URL || 'https://example.com'
+  const siteUrl = process.env.SITE_URL || 'https://www.exploredarija.com'
 
-  const staticPages = ['/', '/pricing', '/booking', '/contact', '/privacy', '/terms', '/blog']
+  const staticPages = ['/', '/translator', '/pricing', '/booking', '/pricing', '/privacy', '/terms', '/blog']
   let slugs: string[] = []
 
   try {

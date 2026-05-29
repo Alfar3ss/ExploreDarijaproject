@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import TiptapEditor from "./tiptap-editor"
 
 type Post = {
   slug: string
@@ -150,10 +149,16 @@ export default function PostEditor({ initial, onSave, onCancel }: {
 
       <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-4">
         <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <label className="text-sm font-semibold text-slate-700">Content</label>
-          <div className="text-xs text-slate-500">Use the rich editor for headings, lists, links, images and tables.</div>
+          <label className="text-sm font-semibold text-slate-700">Content (HTML)</label>
+          <div className="text-xs text-slate-500">Paste raw HTML code here. You can also use plain text wrapped in &lt;p&gt; tags.</div>
         </div>
-        <TiptapEditor value={content} onChange={setContent} />
+        <textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="Paste your HTML code here..."
+          rows={15}
+          className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 font-mono text-sm text-slate-900 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+        />
       </div>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-2">

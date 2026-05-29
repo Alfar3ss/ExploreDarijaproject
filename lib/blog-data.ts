@@ -21,6 +21,25 @@ export type BlogPost = {
 
 const postsFile = path.join(process.cwd(), 'public', 'assets', 'data', 'posts.json')
 
+function decodeHtmlEntities(value: string): string {
+  return value.replace(/&(lt|gt|amp|quot|#39);/g, (entity) => {
+    switch (entity) {
+      case '&lt;':
+        return '<'
+      case '&gt;':
+        return '>'
+      case '&amp;':
+        return '&'
+      case '&quot;':
+        return '"'
+      case '&#39;':
+        return "'"
+      default:
+        return entity
+    }
+  })
+}
+
 function normalizePost(raw: any): BlogPost {
   const date = raw.date ? String(raw.date) : new Date().toISOString()
   return {
@@ -28,7 +47,7 @@ function normalizePost(raw: any): BlogPost {
     title: String(raw.title || '').trim(),
     description: String(raw.description || '').trim(),
     excerpt: String(raw.excerpt || raw.description || '').trim(),
-    content: String(raw.content || '<p></p>'),
+    content: decodeHtmlEntities(String(raw.content || '<p></p>')),
     image: raw.image ? String(raw.image).trim() : undefined,
     meta_title: raw.meta_title ? String(raw.meta_title).trim() : raw.title,
     meta_description: raw.meta_description ? String(raw.meta_description).trim() : raw.description,
