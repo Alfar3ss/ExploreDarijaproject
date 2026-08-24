@@ -19,12 +19,12 @@ export default async function BlogPage() {
   }))
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#fffaf5] px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <div className="rounded-3xl bg-gradient-to-r from-slate-950 via-slate-800 to-slate-900 px-8 py-16 text-white shadow-2xl shadow-slate-900/10">
-          <p className="text-sm uppercase tracking-[0.35em] text-cyan-300">ExploreDarija Blog</p>
-          <h1 className="mt-4 text-5xl font-extrabold tracking-tight">Learn Darija with stories, culture, and travel insight.</h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-200">Discover fresh articles, vocabulary guides, local tips, and practical conversations for anyone who wants to experience Morocco in the native language.</p>
+        <div className="border border-black bg-black px-8 py-16 text-white shadow-[8px_8px_0_#e76f51]">
+          <p className="text-sm uppercase tracking-[0.35em] text-[#ff7aac]">ExploreDarija Blog</p>
+          <h1 className="mt-4 max-w-4xl font-serif text-5xl font-normal leading-[0.98] md:text-7xl">Learn Darija with stories, culture, and travel insight.</h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-300">Discover fresh articles, vocabulary guides, local tips, and practical conversations for anyone who wants to experience Morocco in the native language.</p>
         </div>
 
         <div className="mt-10">

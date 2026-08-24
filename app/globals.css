@@ -6,16 +6,43 @@
 	--color-primary: #ff7aac;
 	--color-primary-dark: #ff5f97;
 	--color-black: #000000;
+	--color-paper: #fffaf5;
+	--color-ink: #171717;
+	--color-coral: #e76f51;
 }
 
 @layer base {
 	body {
-		background-color: #ffffff;
-		color: var(--color-black);
+		background-color: var(--color-paper);
+		background-image: radial-gradient(rgba(23, 23, 23, 0.055) 0.7px, transparent 0.7px);
+		background-size: 12px 12px;
+		color: var(--color-ink);
+		font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+		-webkit-font-smoothing: antialiased;
+	}
+	h1, h2, h3, h4 {
+		font-family: Georgia, "Times New Roman", serif;
+		letter-spacing: -0.02em;
 	}
 	a {
 		color: var(--color-primary);
 	}
+}
+
+/* Keep page-level shells on the same paper surface as the storefront. */
+main.min-h-screen,
+div.min-h-screen.bg-white,
+main.bg-white,
+main.bg-slate-50,
+main.bg-gray-50 {
+	background-color: var(--color-paper) !important;
+	background-image: radial-gradient(rgba(23, 23, 23, 0.04) 0.7px, transparent 0.7px);
+	background-size: 12px 12px;
+}
+
+button,
+a {
+	-webkit-tap-highlight-color: transparent;
 }
 
 /* Tiptap Editor Styles */

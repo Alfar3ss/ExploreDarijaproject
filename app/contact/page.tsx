@@ -31,8 +31,9 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="max-w-3xl mx-auto px-4 md:px-8 py-12">
-      <h1 className="text-2xl font-bold mb-4">Contact</h1>
+    <main className="mx-auto max-w-3xl px-4 py-16 md:px-8 md:py-24">
+      <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#e76f51]">Get in touch</p>
+      <h1 className="mt-3 mb-4 font-serif text-5xl font-normal">Contact</h1>
       <p className="text-gray-700 mb-4">
         Have questions or feedback? Drop us a message at{" "}
         <a href="mailto:contact@exploredarija.com" className="text-primary">
@@ -44,7 +45,7 @@ export default function ContactPage() {
           <div>
             <label className="block text-sm font-medium text-gray-700">Name</label>
             <input
-              className="mt-1 block w-full border rounded-md px-3 py-2"
+              className="mt-1 block w-full border border-black/20 bg-white px-3 py-3 outline-none transition focus:border-black"
               value={name}
               onChange={e => setName(e.target.value)}
               required
@@ -53,7 +54,7 @@ export default function ContactPage() {
           <div>
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
-              className="mt-1 block w-full border rounded-md px-3 py-2"
+              className="mt-1 block w-full border border-black/20 bg-white px-3 py-3 outline-none transition focus:border-black"
               value={email}
               onChange={e => setEmail(e.target.value)}
               type="email"
@@ -63,7 +64,7 @@ export default function ContactPage() {
           <div>
             <label className="block text-sm font-medium text-gray-700">Message</label>
             <textarea
-              className="mt-1 block w-full border rounded-md px-3 py-2"
+              className="mt-1 block w-full border border-black/20 bg-white px-3 py-3 outline-none transition focus:border-black"
               rows={6}
               value={message}
               onChange={e => setMessage(e.target.value)}
@@ -72,7 +73,7 @@ export default function ContactPage() {
           </div>
           <button
             type="submit"
-            className="px-4 py-2 bg-primary text-white rounded-md"
+            className="bg-black px-6 py-3 font-semibold text-white transition hover:bg-[#e76f51]"
             disabled={status === "loading"}
           >
             {status === "loading" ? "Sending..." : "Send"}

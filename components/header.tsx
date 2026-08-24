@@ -52,6 +52,7 @@ export default function Header() {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6 ml-6">
           <Link href="/pricing" className="text-sm font-medium text-white hover:text-primary transition">{t('nav.pricing')}</Link>
+          <Link href="/shop" className="text-sm font-medium text-white hover:text-primary transition">Shop</Link>
           <Link href="/blog" className="text-sm font-medium text-white hover:text-primary transition">{t('nav.blog')}</Link>
           <ProtectedLink href="/dashboard/chat" className="text-sm font-medium text-white hover:text-primary transition">{t('nav.dictionary')}</ProtectedLink>
           
@@ -135,6 +136,12 @@ export default function Header() {
               {/* FIXED: Removed legacyBehavior and nested <a> tag */}
               <Link href="/pricing" className="text-white font-medium py-2 px-1">
                 {t('nav.pricing')}
+              </Link>
+              <Link href="/shop" className="text-white font-medium py-2 px-1" onClick={() => setOpen(false)}>
+                Shop
+              </Link>
+              <Link href="/shop/products" className="text-white/70 font-medium py-2 px-1 text-sm" onClick={() => setOpen(false)}>
+                Browse products
               </Link>
               
               {/* FIXED: Removed legacyBehavior and nested <a> tag */}

@@ -43,6 +43,7 @@ export default function AdminSidebar({ compact = false }: { compact?: boolean })
       <Item href="/admin/blogger" label="Blogger" icon={<svg viewBox="0 0 24 24" fill="none" className="w-5 h-5"><path d="M4 6h16v2H4V6zm0 5h10v2H4v-2zm0 5h16v2H4v-2z" fill="currentColor"/></svg>} />
       <Item href="/admin/comments" label="Comments" icon={<svg viewBox="0 0 24 24" fill="none" className="w-5 h-5"><path d="M21 6h-2V4a2 2 0 0 0-2-2H7v2H5a2 2 0 0 0-2 2v11l4-2h10a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z" fill="currentColor"/></svg>} />
       <Item href="/admin/users" label="Users" icon={<svg viewBox="0 0 24 24" fill="none" className="w-5 h-5"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-5 0-9 2.5-9 5v2h18v-2c0-2.5-4-5-9-5z" fill="currentColor"/></svg>} />
+      <Item href="/admin/shop" label="Shop" icon={<svg viewBox="0 0 24 24" fill="none" className="w-5 h-5"><path d="M4 4h16l1 5H3l1-5zm0 7h16v9H4v-9zm4 3v3m4-3v3m4-3v3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>} />
       <Item href="/admin/bookings" label="Bookings" icon={
         <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">
           <rect x="3" y="4" width="18" height="18" rx="3" fill="currentColor" fillOpacity="0.08"/>
