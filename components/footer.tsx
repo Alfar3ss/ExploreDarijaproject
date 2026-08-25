@@ -14,8 +14,8 @@ export default function Footer() {
   if (pathname === '/login' && redirect?.startsWith('/admin')) return null
   const t = useT()
   return (
-    <footer className="w-full bg-black text-gray-200 border-t border-gray-800">
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="w-full border-t border-[#17211d]/10 bg-[#17211d] text-[#f8f6f0]">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 py-14 md:grid-cols-3 md:px-10">
         <div>
           <Link href="/" className="flex items-center gap-3 no-underline">
               <img src="/MainLogo.png" alt={t('site.name')} className="w-6 h-6 object-contain" />
@@ -25,7 +25,7 @@ export default function Footer() {
             </div>
           </Link>
 
-          <p className="mt-4 text-sm text-gray-400 max-w-sm">
+            <p className="mt-4 max-w-sm text-sm text-white/60">
             {t('footer.description')}
           </p>
         </div>
@@ -35,22 +35,22 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-white">{t('footer.title_site')}</h4>
             <ul className="mt-3 space-y-2 text-sm">
               <li>
-                <Link href="/pricing" className="text-gray-300 hover:text-primary transition">{t('nav.pricing')}</Link>
+                <Link href="/pricing" className="text-white/65 transition hover:text-[#e98263]">{t('nav.pricing')}</Link>
               </li>
               <li>
-                <Link href="/shop" className="text-gray-300 hover:text-primary transition">Shop</Link>
+                <Link href="/shop" className="text-white/65 transition hover:text-[#e98263]">Shop</Link>
               </li>
               <li>
-                <Link href="/shop/products" className="text-gray-300 hover:text-primary transition">All products</Link>
+                <Link href="/shop/products" className="text-white/65 transition hover:text-[#e98263]">All products</Link>
               </li>
               <li>
-                <Link href="/blog" className="text-gray-300 hover:text-primary transition">{t('nav.blog')}</Link>
+                <Link href="/blog" className="text-white/65 transition hover:text-[#e98263]">{t('nav.blog')}</Link>
               </li>
               <li>
-                <ProtectedLink href="/dashboard/chat" className="text-gray-300 hover:text-primary transition cursor-pointer">{t('nav.dictionary')}</ProtectedLink>
+                <ProtectedLink href="/dashboard/chat" className="text-white/65 transition hover:text-[#e98263] cursor-pointer">{t('nav.dictionary')}</ProtectedLink>
               </li>
               <li>
-                <Link href="/translator" className="text-gray-300 hover:text-primary transition">{t('nav.translator')}</Link>
+                <Link href="/translator" className="text-white/65 transition hover:text-[#e98263]">{t('nav.translator')}</Link>
               </li>
             </ul>
           </div>
@@ -59,25 +59,25 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-white">{t('footer.title_legal')}</h4>
             <ul className="mt-3 space-y-2 text-sm">
               <li>
-                <Link href="/privacy" className="text-gray-300 hover:text-primary transition">{t('footer.privacy')}</Link>
+                <Link href="/privacy" className="text-white/65 transition hover:text-[#e98263]">{t('footer.privacy')}</Link>
               </li>
               <li>
-                <Link href="/terms" className="text-gray-300 hover:text-primary transition">{t('footer.terms')}</Link>
+                <Link href="/terms" className="text-white/65 transition hover:text-[#e98263]">{t('footer.terms')}</Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-300 hover:text-primary transition">{t('footer.contact')}</Link>
+                <Link href="/contact" className="text-white/65 transition hover:text-[#e98263]">{t('footer.contact')}</Link>
               </li>
               <li>
-                <Link href="/refund-policy" className="text-gray-300 hover:text-primary transition">{t('footer.refund_policy')}</Link>
+                <Link href="/refund-policy" className="text-white/65 transition hover:text-[#e98263]">{t('footer.refund_policy')}</Link>
               </li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-gray-800">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-sm text-gray-400">© {new Date().getFullYear()} {t('site.name')} — All rights reserved.</div>
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 py-5 md:flex-row md:px-10">
+          <div className="text-sm text-white/45">© {new Date().getFullYear()} {t('site.name')} — All rights reserved.</div>
           <div className="flex items-center gap-4">
             <Link href="https://twitter.com" className="text-gray-400 hover:text-white" aria-label="Twitter">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 19c7 0 10.8-6 10.8-11v-.5A7.8 7.8 0 0021 4.8a7.5 7.5 0 01-2.1.6 3.7 3.7 0 001.6-2 7.4 7.4 0 01-2.3.9A3.7 3.7 0 0013.5 4c-2 0-3.4 1.8-3 3.6A10.5 10.5 0 015 5.6a3.7 3.7 0 001.1 4.9 3.6 3.6 0 01-1.7-.5v.1c0 1.7 1.2 3.2 2.8 3.6a3.7 3.7 0 01-1.7.1c.5 1.6 2 2.8 3.7 2.8A7.4 7.4 0 015 17.6 10.4 10.4 0 008 19z" fill="currentColor"/></svg>

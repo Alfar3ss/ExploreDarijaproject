@@ -6,82 +6,49 @@ import ProtectedLink from "./protected-link";
 import { useRouter } from "next/navigation";
 import LoginForm from "./login-form";
 
+const steps = [
+  ['01', 'Find your phrase', 'Start with practical Darija for the places and conversations that matter to you.'],
+  ['02', 'Practice with Lhajja', 'Get natural examples, gentle corrections, and cultural context whenever you need it.'],
+  ['03', 'Build your rhythm', 'Return to your saved words and grow a confident everyday vocabulary.'],
+  ['04', 'Speak with ease', 'Take your Darija into real conversations, travel, and life in Morocco.'],
+]
+
 export default function HomeClient() {
   const t = useT();
   const router = useRouter();
   const [loginOpen, setLoginOpen] = useState(false);
 
-  const handleLoginSuccess = () => {
-    setLoginOpen(false);
-    router.push("/dashboard/chat");
-  };
 
-  return (
-    <main className="min-h-screen bg-[#fffaf5] text-[#171717]">
-      {/* Hero Section */}
-      <section className="w-full overflow-hidden bg-black px-6 pb-24 pt-20 text-center text-white md:px-16 md:pb-32 md:pt-28 md:text-left">
-        <MotionDiv className="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10">
-          <div className="flex-1">
-            <h1 className="text-5xl font-normal leading-[0.95] md:text-8xl">
-              {t('home.hero_title')} <br />
-            </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-300 md:text-xl">{t('home.hero_sub')}</p>
-            <div className="mt-8 flex justify-center md:justify-start gap-4">
-              <a href="/pricing" className="bg-primary px-6 py-3 font-semibold text-white transition hover:bg-primary-dark">{t('home.cta_start')} <span aria-hidden="true">↗</span></a>
-              <ProtectedLink href="/dashboard/chat" className="border border-white/60 px-6 py-3 font-semibold text-white transition hover:bg-white hover:text-black">Chat with Lhajja AI</ProtectedLink>
+    return (
+      <main className="bg-[#f8f6f0] text-[#17211d]">
+        <section className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-16 md:grid-cols-[0.9fr_1.1fr] md:px-10 md:pb-28 md:pt-24">
+          <MotionDiv>
+            <p className="mb-6 text-sm font-semibold uppercase tracking-[0.18em] text-primary">Moroccan Darija, made human</p>
+            <h1 className="max-w-xl text-5xl font-normal leading-[1.03] md:text-7xl">{t('home.hero_title')}<br /><em className="text-primary">with confidence.</em></h1>
+            <p className="mt-7 max-w-lg text-lg leading-8 text-[#17211d]/65">{t('home.hero_sub')}</p>
+            <div className="mt-9 flex flex-wrap items-center gap-4">
+              <a href="/pricing" className="bg-primary px-6 py-3.5 text-sm font-bold text-white transition hover:bg-primary-dark">{t('home.cta_start')} <span aria-hidden="true">↗</span></a>
+              <ProtectedLink href="/dashboard/chat" className="border border-[#17211d]/25 px-6 py-3.5 text-sm font-bold transition hover:border-primary hover:text-primary">{t('home.cta_dictionary')}</ProtectedLink>
             </div>
-          </div>
-          <div className="flex-1 flex justify-center">
-            <img
-              src="/hero.png"
-              alt="Darija Hero"
-              className="w-full max-w-2xl h-auto object-contain bg-transparent"
-              style={{ background: "transparent" }}
-              loading="eager"
-              width={600}
-              height={450}
-            />
-          </div>
-        </MotionDiv>
-      </section>
+            <div className="mt-10 flex items-center gap-3 text-sm text-[#17211d]/60"><span className="text-lg tracking-widest text-primary">★★★★★</span><span><strong className="text-[#17211d]">4.9/5</strong> from Darija learners</span></div>
+          </MotionDiv>
+          <MotionDiv className="relative">
+            <div className="absolute -right-3 top-6 hidden h-24 w-24 rounded-full border border-primary/30 md:block" />
+            <div className="relative overflow-hidden rounded-[2rem] bg-[#f1d9c9] px-4 pt-8 md:px-10 md:pt-12"><img src="/hero.png" alt="Students learning Moroccan Darija together" className="relative z-10 w-full object-contain" width={660} height={450} /></div>
+            <div className="absolute -bottom-5 left-5 z-20 border border-[#17211d]/10 bg-[#f8f6f0] px-5 py-4 shadow-sm"><p className="font-serif text-2xl">1000+</p><p className="text-xs uppercase tracking-wider text-[#17211d]/55">curious learners</p></div>
+          </MotionDiv>
+        </section>
 
-      {/* Features Section */}
-      <section className="border-b border-black/10 bg-[#f4a261]/15 px-6 py-20 md:px-16">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="mb-12 text-center text-4xl font-normal md:text-5xl">{t('home.features_title')}</h2>
+        <section className="border-y border-[#17211d]/10 bg-[#17211d] px-5 py-8 text-[#f8f6f0] md:px-10"><div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 text-center md:grid-cols-4"><div><p className="font-serif text-4xl">100+</p><p className="mt-1 text-xs uppercase tracking-[0.15em] text-white/60">daily phrases</p></div><div><p className="font-serif text-4xl">24/7</p><p className="mt-1 text-xs uppercase tracking-[0.15em] text-white/60">AI practice</p></div><div><p className="font-serif text-4xl">4</p><p className="mt-1 text-xs uppercase tracking-[0.15em] text-white/60">languages in</p></div><div><p className="font-serif text-4xl">1</p><p className="mt-1 text-xs uppercase tracking-[0.15em] text-white/60">Moroccan voice</p></div></div></section>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <MotionDiv className="flex flex-col items-center border border-black/10 bg-white p-8 shadow-[4px_4px_0_#171717] transition hover:-translate-y-1">
-              <img src="/translator.png" alt={t('home.features_translator_icon_alt')} className="w-23 h-23 mb-3 mx-auto" />
-              <h3 className="text-xl font-semibold mb-3">{t('home.features_translator_title')}</h3>
-              <p className="text-gray-600">{t('home.features_translator_desc')}</p>
-            </MotionDiv>
+        <section className="mx-auto max-w-7xl px-5 py-24 md:px-10"><div className="mb-14 max-w-2xl"><p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-primary">A simple way forward</p><h2 className="text-4xl font-normal md:text-5xl">Your path to everyday Darija</h2></div><div className="grid gap-0 border-t border-[#17211d]/15 md:grid-cols-4">{steps.map(([number, title, description]) => <article key={number} className="border-b border-[#17211d]/15 py-8 md:border-b-0 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0"><p className="mb-8 text-sm font-bold text-primary">{number}</p><h3 className="text-2xl font-normal">{title}</h3><p className="mt-4 text-sm leading-6 text-[#17211d]/60">{description}</p></article>)}</div></section>
 
-            <MotionDiv className="flex flex-col items-center border border-black/10 bg-white p-8 shadow-[4px_4px_0_#171717] transition hover:-translate-y-1">
-              <img src="/lhajja.png" alt={t('home.features_lhajja_icon_alt')} className="w-23 h-23 mb-3 mx-auto" />
-              <h3 className="text-xl font-semibold mb-3">{t('home.features_lhajja_title')}</h3>
-              <p className="text-gray-600">{t('home.features_lhajja_desc')}</p>
-            </MotionDiv>
+        <section className="bg-[#e9eee7] px-5 py-24 md:px-10"><div className="mx-auto max-w-7xl"><div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-primary">Made for real life</p><h2 className="text-4xl font-normal md:text-5xl">Everything you need<br />to keep speaking.</h2></div><p className="max-w-sm text-sm leading-6 text-[#17211d]/60">Learn the words people actually use, with tools that help you remember them and context that helps you use them well.</p></div><div className="grid gap-5 md:grid-cols-3"><article className="bg-[#f8f6f0] p-7"><img src="/translator.png" alt="" className="mb-8 h-14 w-14 object-contain" /><h3 className="text-2xl font-normal">Translate naturally</h3><p className="mt-3 text-sm leading-6 text-[#17211d]/60">Go beyond word-for-word translations with everyday Moroccan meaning and tone.</p><a href="/translator" className="mt-8 inline-block text-sm font-bold text-primary">Try the translator ↗</a></article><article className="bg-[#f8f6f0] p-7"><img src="/lhajja.png" alt="" className="mb-8 h-14 w-14 object-contain" /><h3 className="text-2xl font-normal">Chat with Lhajja</h3><p className="mt-3 text-sm leading-6 text-[#17211d]/60">Practice without pressure. Lhajja helps you find the right expression for every moment.</p><ProtectedLink href="/dashboard/chat" className="mt-8 inline-block text-sm font-bold text-primary">Meet Lhajja ↗</ProtectedLink></article><article className="bg-[#f8f6f0] p-7"><img src="/native.png" alt="" className="mb-8 h-14 w-14 object-contain" /><h3 className="text-2xl font-normal">Learn the culture</h3><p className="mt-3 text-sm leading-6 text-[#17211d]/60">Explore expressions, stories, and small details that make Darija feel alive.</p><a href="/blog" className="mt-8 inline-block text-sm font-bold text-primary">Read the journal ↗</a></article></div></div></section>
 
-            <MotionDiv className="flex flex-col items-center justify-center border border-black/10 bg-white p-8 shadow-[4px_4px_0_#171717] transition hover:-translate-y-1">
-              <img src="/native.png" alt={t('home.features_native_icon_alt')} className="w-23 h-23 mb-3 mx-auto" />
-              <h3 className="text-xl font-semibold mb-3 text-center">{t('home.features_native_title')}</h3>
-              <p className="text-gray-600 text-center">{t('home.features_native_desc')}</p>
-            </MotionDiv>
-          </div>
-        </div>
-      </section>
+        <section className="mx-auto max-w-7xl px-5 py-24 text-center md:px-10"><p className="mb-5 text-sm font-semibold uppercase tracking-[0.18em] text-primary">Start where you are</p><h2 className="mx-auto max-w-3xl font-serif text-4xl font-normal leading-tight md:text-6xl">Darija is a rhythm, a feeling, a piece of Morocco you carry with you.</h2><button onClick={() => setLoginOpen(true)} className="mt-10 bg-[#17211d] px-7 py-4 text-sm font-bold text-white transition hover:bg-primary">Begin your journey ↗</button></section>
 
-      {/* Quote Section */}
-      <section className="px-6 py-24 text-center md:px-16">
-        <MotionDiv className="max-w-2xl mx-auto">
-          <blockquote className="font-serif text-3xl font-normal leading-tight text-black/75 md:text-5xl">{t('home.quote')}</blockquote>
-        </MotionDiv>
-      </section>
+        {loginOpen && <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#17211d]/70 p-5"><div className="relative w-full max-w-md bg-[#f8f6f0] p-7"><button onClick={() => setLoginOpen(false)} className="absolute right-4 top-3 text-2xl" aria-label="Close login">×</button><LoginForm onSuccess={() => { setLoginOpen(false); router.push('/dashboard/chat') }} /></div></div>}
+      </main>
+    )
 
-      {/* Footer */}
-      <footer className="py-10 border-t bg-gray-50 text-center text-gray-600">
-      </footer>
-    </main>
-  );
 }

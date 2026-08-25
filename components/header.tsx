@@ -36,30 +36,31 @@ export default function Header() {
   }, [open])
 
   return (
-    <header className="w-full bg-black border-b border-gray-800 shadow-sm">
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-30 w-full border-b border-[#17211d]/10 bg-[#f8f6f0]/95 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 md:px-10">
         <Link href="/" className="flex items-center gap-3 no-underline">
-          <div className="w-12 h-12 rounded-lg overflow-hidden">
-            <img src="/MainLogo.png" alt="ExploreDarija" className="w-full h-full object-cover" />
+          <div className="h-10 w-10 overflow-hidden rounded-full bg-[#e98263] p-1">
+            <img src="/MainLogo.png" alt="ExploreDarija" className="h-full w-full object-contain" />
           </div>
 
           <div className="flex flex-col leading-tight">
-            <span className="text-lg font-bold text-white">{t('site.name')}</span>
-            <span className="text-xs text-gray-300">{t('site.slogan')}</span>
+            <span className="text-lg font-bold tracking-tight text-[#17211d]">{t('site.name')}</span>
+            <span className="text-[10px] uppercase tracking-[0.16em] text-[#17211d]/55">{t('site.slogan_short')}</span>
           </div>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6 ml-6">
-          <Link href="/pricing" className="text-sm font-medium text-white hover:text-primary transition">{t('nav.pricing')}</Link>
-          <Link href="/shop" className="text-sm font-medium text-white hover:text-primary transition">Shop</Link>
-          <Link href="/blog" className="text-sm font-medium text-white hover:text-primary transition">{t('nav.blog')}</Link>
-          <ProtectedLink href="/dashboard/chat" className="text-sm font-medium text-white hover:text-primary transition">{t('nav.dictionary')}</ProtectedLink>
+        <nav className="ml-6 hidden items-center gap-7 md:flex">
+          <Link href="/" className="text-sm font-medium text-[#17211d]/75 transition hover:text-primary">{t('nav.home')}</Link>
+          <Link href="/pricing" className="text-sm font-medium text-[#17211d]/75 transition hover:text-primary">{t('nav.pricing')}</Link>
+          <Link href="/shop" className="text-sm font-medium text-[#17211d]/75 transition hover:text-primary">Shop</Link>
+          <Link href="/blog" className="text-sm font-medium text-[#17211d]/75 transition hover:text-primary">{t('nav.blog')}</Link>
+          <ProtectedLink href="/dashboard/chat" className="text-sm font-medium text-[#17211d]/75 transition hover:text-primary">{t('nav.dictionary')}</ProtectedLink>
           
           {/* FIXED: Removed legacyBehavior and nested <a> tag */}
           <Link 
             href="/translator" 
-            className="flex items-center gap-2 text-sm font-medium text-white hover:text-primary transition border border-white rounded-md px-2 py-1"
+            className="flex items-center gap-2 text-sm font-medium text-[#17211d]/75 transition hover:text-primary"
           >
             <svg viewBox="0 0 256 256" className="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M62.4,101c-1.5-2.1-2.1-3.4-1.8-3.9c0.2-0.5,1.6-0.7,3.9-0.5c2.3,0.2,4.2,0.5,5.8,0.9c1.5,0.4,2.8,1,3.8,1.7
@@ -86,7 +87,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <div className="hidden sm:block"><LanguageSwitcher className="text-white" /></div>
+          <div className="hidden sm:block"><LanguageSwitcher className="text-[#17211d]" /></div>
           <UserSession />
           {/* Mobile menu button */}
           <button
