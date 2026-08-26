@@ -18,22 +18,14 @@ export default function Header() {
   const { t } = useLanguage()
 
   useEffect(() => {
-    // lock body scroll while menu is open
-    if (open) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') setOpen(false)
     }
     document.addEventListener('keydown', onKey)
     return () => {
       document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
     }
-  }, [open])
+  }, [])
 
   return (
     <header className="sticky top-0 z-30 w-full border-b border-[#17211d]/10 bg-[#f8f6f0]/95 backdrop-blur">
@@ -53,7 +45,6 @@ export default function Header() {
         <nav className="ml-6 hidden items-center gap-7 md:flex">
           <Link href="/" className="text-sm font-medium text-[#17211d]/75 transition hover:text-primary">{t('nav.home')}</Link>
           <Link href="/pricing" className="text-sm font-medium text-[#17211d]/75 transition hover:text-primary">{t('nav.pricing')}</Link>
-          <Link href="/shop" className="text-sm font-medium text-[#17211d]/75 transition hover:text-primary">Shop</Link>
           <Link href="/blog" className="text-sm font-medium text-[#17211d]/75 transition hover:text-primary">{t('nav.blog')}</Link>
           <ProtectedLink href="/dashboard/chat" className="text-sm font-medium text-[#17211d]/75 transition hover:text-primary">{t('nav.dictionary')}</ProtectedLink>
           
@@ -89,10 +80,14 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <div className="hidden sm:block"><LanguageSwitcher className="text-[#17211d]" /></div>
           <UserSession />
+          <Link href="/shop" className="hidden items-center gap-2 rounded-full border-2 border-primary-dark bg-primary px-4 py-2 text-sm font-bold text-white shadow-[3px_3px_0_#17211d] transition hover:bg-primary-dark hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_#17211d] md:flex" aria-label="Shop">
+            <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5h2l2.4 10.2a2 2 0 0 0 2 1.5h7.8a2 2 0 0 0 1.9-1.4L21 8H6M10 20a1 1 0 1 1-2 0 1 1 0 1 1 2 0Zm9 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" /></svg>
+            Shop
+          </Link>
           {/* Mobile menu button */}
           <button
             onClick={() => setOpen((s) => !s)}
-            className="md:hidden p-2 rounded-md text-white hover:bg-white/5 focus:outline-none"
+            className="md:hidden rounded-md bg-black p-2 text-white shadow-sm transition hover:bg-[#17211d] focus:outline-none"
             aria-label="Toggle menu"
             aria-expanded={open}
           >
@@ -107,18 +102,19 @@ export default function Header() {
       <div className="md:hidden">
         {/* Backdrop */}
         <div
-          className={`fixed inset-0 bg-black/60 z-40 transition-opacity duration-300 ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+          className={`fixed inset-0 z-40 bg-black/80 transition-opacity duration-300 ${open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
           onClick={() => setOpen(false)}
           aria-hidden={!open}
         />
 
         {/* Sliding panel */}
         <aside
-          className={`fixed top-0 right-0 h-full w-72 bg-black z-50 transform transition-transform duration-300 ease-in-out ${open ? 'translate-x-0' : 'translate-x-full'}`}
+          className={`fixed right-0 top-0 z-50 h-[100dvh] w-[min(86vw,20rem)] transform overflow-y-auto bg-[#17211d] shadow-2xl ring-1 ring-white/10 transition-transform duration-300 ease-in-out ${open ? 'translate-x-0' : 'translate-x-full'}`}
+          style={{ backgroundColor: '#17211d', opacity: 1 }}
           aria-hidden={!open}
         >
-          <div className="p-4 h-full flex flex-col">
-            <div className="flex items-center justify-between mb-4">
+          <div className="flex min-h-full flex-col bg-[#17211d] p-5">
+            <div className="mb-7 flex items-center justify-between border-b border-white/10 pb-5">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg overflow-hidden">
                   <img src="https://i.ibb.co/3J6fd6T/logo.png" alt="iDarija" className="w-full h-full object-cover" />
@@ -133,12 +129,13 @@ export default function Header() {
               </button>
             </div>
 
-            <nav className="flex-1 flex flex-col gap-3">
+            <nav className="flex flex-1 flex-col gap-2">
               {/* FIXED: Removed legacyBehavior and nested <a> tag */}
               <Link href="/pricing" className="text-white font-medium py-2 px-1">
                 {t('nav.pricing')}
               </Link>
-              <Link href="/shop" className="text-white font-medium py-2 px-1" onClick={() => setOpen(false)}>
+              <Link href="/shop" className="flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-center text-sm font-bold text-white shadow-sm transition hover:bg-primary-dark" onClick={() => setOpen(false)}>
+                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5h2l2.4 10.2a2 2 0 0 0 2 1.5h7.8a2 2 0 0 0 1.9-1.4L21 8H6M10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm9 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" /></svg>
                 Shop
               </Link>
               <Link href="/shop/products" className="text-white/70 font-medium py-2 px-1 text-sm" onClick={() => setOpen(false)}>
